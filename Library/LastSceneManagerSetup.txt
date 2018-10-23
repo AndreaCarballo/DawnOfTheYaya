@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/APZ_Construcciones/SCENES/URBANIZACION_BACKUP.unity
-  isLoaded: 1
-  isActive: 1
