@@ -36,6 +36,12 @@ public class QLearning
         firstIteration = true;
     }
 
+    /*
+      It obtains the optimal action for the agent
+      currentState: the state the agent just observed
+      reward: the reward for the last action
+      returns the number that corresponds with the optimal action for the agent to take
+    */
     public int getAction(float[] currentState, float reward)
     {
         iterationUpdate(currentState, reward); //updates the action quality
@@ -76,6 +82,11 @@ public class QLearning
         return pastActionIndex;
     }
 
+    /*
+      It updates the quality of the last action taken by the agent
+      nState: the new state
+      reward: the reward for the last action
+    */
     public void iterationUpdate(float[] nState, float reward)
     {
         if (!firstIteration) //only if it's not the first iteration
@@ -106,6 +117,12 @@ public class QLearning
         }
     }
 
+    /*
+      It looks for a state in the list
+      stateToFind: state it searches for
+      update: the behaviour changes depending on whether the update method called it or not
+      returns true if the state already exists and false if it doesn't
+    */
     public bool searchState(float[] stateToFind, bool update)
     {
         bool exists = false;
