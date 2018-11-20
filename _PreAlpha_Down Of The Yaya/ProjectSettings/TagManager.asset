@@ -9,6 +9,7 @@ TagManager:
   - npc
   - Inventory
   - Interactable
+  - ChangeCamera
   layers:
   - Default
   - TransparentFX

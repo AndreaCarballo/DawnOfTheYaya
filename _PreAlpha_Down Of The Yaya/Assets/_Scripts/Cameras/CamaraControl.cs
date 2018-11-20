@@ -5,38 +5,131 @@ using UnityEngine.AI;
 
 public class CamaraControl : MonoBehaviour
 {
-
-    public Camera mainCamera;
-    public Camera camera2;
+    //Public variables
+    public Camera MainCamera;
+    public Camera GarageCamera;
+    public Camera LivRoomCamera;
+    public Camera KitchenCamera;
+    public Camera GardenCamera;
+    public Camera BathCamera;
+    public Camera StairsCamera;
     public GameObject player;
-    public Transform setposition;
 
+    //Private variables
+    private Vector3 initialCamPos;
 
     // Use this for initialization
     void Start()
     {
-        mainCamera.enabled = true;
-        camera2.enabled = false;
-
+        LivRoomCamera.enabled = true;
+        GarageCamera.enabled = false;
+        StairsCamera.enabled = false;
+        KitchenCamera.enabled = false;
+        GardenCamera.enabled = false;
+        BathCamera.enabled = false;
+        MainCamera.enabled = false;
+        initialCamPos = MainCamera.transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-
-    }
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "cambiocamera")
+        if (other.tag == "ChangeCamera")
         {
-
-            mainCamera.enabled = false;
-            camera2.enabled = true;
-            player.GetComponent<NavMeshAgent>().Warp(new Vector3(-88.102f, -0.766f, 0.324f));
-
+            switch (other.name)
+            {
+                case "TargetGarage":
+                    LivRoomCamera.enabled = false;
+                    GarageCamera.enabled = true;
+                    StairsCamera.enabled = false;
+                    KitchenCamera.enabled = false;
+                    GardenCamera.enabled = false;
+                    BathCamera.enabled = false;
+                    MainCamera.enabled = false;
+                    break;
+                case "TargetBath":
+                    LivRoomCamera.enabled = false;
+                    GarageCamera.enabled = false;
+                    StairsCamera.enabled = false;
+                    KitchenCamera.enabled = false;
+                    GardenCamera.enabled = false;
+                    BathCamera.enabled = true;
+                    MainCamera.enabled = false;
+                    break;
+                case "TargetLivRoom":
+                    LivRoomCamera.enabled = true;
+                    GarageCamera.enabled = false;
+                    StairsCamera.enabled = false;
+                    KitchenCamera.enabled = false;
+                    GardenCamera.enabled = false;
+                    BathCamera.enabled = false;
+                    MainCamera.enabled = false;
+                    break;
+                case "TargetLivRoom2":
+                    LivRoomCamera.enabled = true;
+                    GarageCamera.enabled = false;
+                    StairsCamera.enabled = false;
+                    KitchenCamera.enabled = false;
+                    GardenCamera.enabled = false;
+                    BathCamera.enabled = false;
+                    MainCamera.enabled = false;
+                    break;
+                case "TargetLivRoom3":
+                    LivRoomCamera.enabled = true;
+                    GarageCamera.enabled = false;
+                    StairsCamera.enabled = false;
+                    KitchenCamera.enabled = false;
+                    GardenCamera.enabled = false;
+                    BathCamera.enabled = false;
+                    MainCamera.enabled = false;
+                    break;
+                case "TargetStairs":
+                    LivRoomCamera.enabled = false;
+                    GarageCamera.enabled = false;
+                    StairsCamera.enabled = true;
+                    KitchenCamera.enabled = false;
+                    GardenCamera.enabled = false;
+                    BathCamera.enabled = false;
+                    MainCamera.enabled = false;
+                    break;
+                case "TargetKitchen":
+                    LivRoomCamera.enabled = false;
+                    GarageCamera.enabled = false;
+                    StairsCamera.enabled = false;
+                    KitchenCamera.enabled = true;
+                    GardenCamera.enabled = false;
+                    BathCamera.enabled = false;
+                    MainCamera.enabled = false;
+                    break;
+                case "TargetKitchen2":
+                    LivRoomCamera.enabled = false;
+                    GarageCamera.enabled = false;
+                    StairsCamera.enabled = false;
+                    KitchenCamera.enabled = true;
+                    GardenCamera.enabled = false;
+                    BathCamera.enabled = false;
+                    MainCamera.enabled = false;
+                    break;
+                case "TargetGarden":
+                    LivRoomCamera.enabled = false;
+                    GarageCamera.enabled = false;
+                    StairsCamera.enabled = false;
+                    KitchenCamera.enabled = false;
+                    GardenCamera.enabled = true;
+                    BathCamera.enabled = false;
+                    MainCamera.enabled = false;
+                    break;
+                case "TargetExterior":
+                    MainCamera.transform.position = initialCamPos;
+                    LivRoomCamera.enabled = false;
+                    GarageCamera.enabled = false;
+                    StairsCamera.enabled = false;
+                    KitchenCamera.enabled = false;
+                    GardenCamera.enabled = false;
+                    BathCamera.enabled = false;
+                    MainCamera.enabled = true;
+                    break;
+            }
 
         }
-
     }
 }
