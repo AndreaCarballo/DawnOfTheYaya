@@ -13,7 +13,7 @@ public class PlayerHealth : MonoBehaviour {
     //public AudioClip deathClip;
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
-
+    public GameObject MenuGameOver;
     bool isDead;
     bool damage;
 
@@ -52,6 +52,7 @@ public class PlayerHealth : MonoBehaviour {
     void Death()
     {
         isDead = true; //jugador muerto
+        MenuGameOver.SetActive(true);
     }
 
 

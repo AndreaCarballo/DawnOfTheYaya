@@ -21,4 +21,8 @@ public class MainMenu : MonoBehaviour {
 
     }
 
+    public void click()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
 }
