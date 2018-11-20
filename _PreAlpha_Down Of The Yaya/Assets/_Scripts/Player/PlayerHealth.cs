@@ -31,7 +31,6 @@ public class PlayerHealth : MonoBehaviour {
     }
     public void TakeDamage(int amount)
     {
-        Debug.Log("EN JUGADOR");
         currentHealth -= amount; //decrementamos salud en la cantidad
         healthSlider.value = currentHealth; //Actualizamos slider de vida
         if (currentHealth <= 0 && !isDead) {
@@ -39,7 +38,16 @@ public class PlayerHealth : MonoBehaviour {
         }
 
     }
-    
+    public void TakeLife(int amount)
+    {
+        currentHealth += amount; //decrementamos salud en la cantidad
+        healthSlider.value = currentHealth; //Actualizamos slider de vida
+        if (currentHealth >= Healthstart)
+        {
+            currentHealth = Healthstart;
+        }
+
+    }
 
     void Death()
     {

@@ -46,7 +46,7 @@ public class PlayerAttack : MonoBehaviour {
             }
             if (enemyHealth.currentHealth <= 0)
             {
-                Debug.Log("Enemigo Muerto");
+                //Debug.Log("Enemigo Muerto");
                 enemyHealth.Death();
             }
         }
@@ -56,9 +56,7 @@ public class PlayerAttack : MonoBehaviour {
     {
         timer = 0f; //reiniciamos contador tiempo 
         if (enemyHealth.currentHealth > 0) //tiene vida el enemigo? 
-        {
-            Debug.Log("ESTOY VIVO AUN ");
-            
+        {            
             enemyHealth.TakeDamage(Damage); //hacemos daño
         }
     }

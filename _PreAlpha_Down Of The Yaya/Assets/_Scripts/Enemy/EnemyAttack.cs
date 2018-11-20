@@ -49,7 +49,7 @@ public class EnemyAttack : MonoBehaviour {
         }
         if (playerHealth.currentHealth <= 0)
         {
-            Debug.Log("Jugador DEADDDD");
+            //Debug.Log("Jugador muerto");
         }
 	}
 
@@ -61,7 +61,5 @@ public class EnemyAttack : MonoBehaviour {
             playerHealth.TakeDamage(attackDamage); //hacemos daño
         }
     }
-
-
-
+    
 }

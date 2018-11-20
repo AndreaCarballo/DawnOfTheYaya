@@ -45,6 +45,9 @@ public class ObjectInteract : MonoBehaviour
                 case "Bananas":
                     inventory.AddItemByID(2);
                     break;
+                case "RoastedFruits":
+                    inventory.AddItemByID(3);
+                    break;
             }
 
             activeInteract = false;

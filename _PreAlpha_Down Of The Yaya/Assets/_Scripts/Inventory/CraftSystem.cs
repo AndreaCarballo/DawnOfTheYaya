@@ -68,7 +68,7 @@ public class CraftSystem : MonoBehaviour {
         {
             DrawCraftSystem();
             if (showToolTip)
-                GUI.Box(new Rect(Event.current.mousePosition.x + 15f, Event.current.mousePosition.y, 200, 200), toolTip);
+                GUI.Box(new Rect(Event.current.mousePosition.x + 15f, Event.current.mousePosition.y, 200, 300), toolTip);
         }
 
         if (draggingItem)
@@ -78,7 +78,7 @@ public class CraftSystem : MonoBehaviour {
         {
             CraftItems();
             if (showToolTip)
-                GUI.Box(new Rect(Event.current.mousePosition.x + 15f, Event.current.mousePosition.y, 200, 200), toolTip);
+                GUI.Box(new Rect(Event.current.mousePosition.x + 15f, Event.current.mousePosition.y, 200, 300), toolTip);
         }
     }
 
@@ -87,8 +87,10 @@ public class CraftSystem : MonoBehaviour {
     {
         Event ec = Event.current;
 
-        Rect backgroundRect = new Rect(375, 75, 200, 100);
-        GUI.Box(backgroundRect, "CRAFT SYSTEM");
+        Rect backgroundRect = new Rect(375, 75, 300, 200);
+        GUI.Box(backgroundRect, "CRAFT SYSTEM" + "\n\n\n\n\n\n\n" + "<color=#fb8cff>"+
+            "AYUDA: Para craftear ingredientes arrástralos\n desde tu inventario y pulsa 'Enter'"+ "</color>" + "\n\n<color=#fb8cff>" +
+            "AYUDA: Para salir del sistema de crafteo\n pulsa 'Escape'" + "</color>");
 
         for (int i = 0; i < numberOfSlots; i++)
         {

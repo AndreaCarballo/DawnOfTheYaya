@@ -16,6 +16,7 @@ public class Inventory : MonoBehaviour {
     private int prevIndex;
     private GameObject craftStation;
     private bool goCraft;
+    private GameObject playerObject;
 
     //Visible Variables
     public List<Item> inventory = new List<Item>();
@@ -29,8 +30,9 @@ public class Inventory : MonoBehaviour {
     {
         itemDatabase = GameObject.FindGameObjectWithTag("ItemDatabase").GetComponent<ItemDatabase>();
         craftStation = GameObject.Find("CraftStation");
+        playerObject = GameObject.FindGameObjectWithTag("Player");
 
-        for(int i=0; i < (slotsX * slotsY); i++)
+        for (int i=0; i < (slotsX * slotsY); i++)
         {
             slots.Add(new Item());
             inventory.Add(new Item());
@@ -39,6 +41,7 @@ public class Inventory : MonoBehaviour {
         //AddItemByID(0);
         //AddItemByID(1);
         //AddItemByID(2);
+        //AddItemByID(3);
         //RemoveItemByID(0);
 
     }
@@ -65,7 +68,7 @@ public class Inventory : MonoBehaviour {
         {
             DrawInventory();
             if (showToolTip)
-                GUI.Box(new Rect(Event.current.mousePosition.x + 15f, Event.current.mousePosition.y, 200, 200), toolTip);
+                GUI.Box(new Rect(Event.current.mousePosition.x + 15f, Event.current.mousePosition.y, 300, 200), toolTip);
         }
             
         if (draggingItem)
@@ -117,6 +120,12 @@ public class Inventory : MonoBehaviour {
                             craftStation.GetComponent<CraftSystem>().AddItem(inventory[i]);
                             inventory[i] = new Item();
                         }
+                        if (Input.GetKeyDown(KeyCode.U)) //Aumentar vida si pulsamos la U mientras tenemos el raton encima
+                        {
+                            playerObject.GetComponent<PlayerHealth>().TakeLife(inventory[i].itemPower);
+                            inventory[i] = new Item();
+                        }
+                            
                     }
 
                 } else
