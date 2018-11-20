@@ -93,7 +93,6 @@ public class CamaraSeguimiento : MonoBehaviour
         {
             Transform objectHit = hit.transform;
             offset = new Vector3(-offset.x, offset.y, -offset.z);
-            print(objectHit);
         }
     }
 }

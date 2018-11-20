@@ -68,7 +68,7 @@ public class CraftSystem : MonoBehaviour {
         {
             DrawCraftSystem();
             if (showToolTip)
-                GUI.Box(new Rect(Event.current.mousePosition.x + 15f, Event.current.mousePosition.y, 200, 300), toolTip);
+                GUI.Box(new Rect(Event.current.mousePosition.x - 50f, Event.current.mousePosition.y + 175f, 300, 200), toolTip);
         }
 
         if (draggingItem)
@@ -78,7 +78,7 @@ public class CraftSystem : MonoBehaviour {
         {
             CraftItems();
             if (showToolTip)
-                GUI.Box(new Rect(Event.current.mousePosition.x + 15f, Event.current.mousePosition.y, 200, 300), toolTip);
+                GUI.Box(new Rect(Event.current.mousePosition.x - 50f, Event.current.mousePosition.y + 175f, 300, 200), toolTip);
         }
     }
 
@@ -87,14 +87,14 @@ public class CraftSystem : MonoBehaviour {
     {
         Event ec = Event.current;
 
-        Rect backgroundRect = new Rect(375, 75, 300, 200);
+        Rect backgroundRect = new Rect(475, 75, 300, 200);
         GUI.Box(backgroundRect, "CRAFT SYSTEM" + "\n\n\n\n\n\n\n" + "<color=#fb8cff>"+
             "AYUDA: Para craftear ingredientes arrástralos\n desde tu inventario y pulsa 'Enter'"+ "</color>" + "\n\n<color=#fb8cff>" +
             "AYUDA: Para salir del sistema de crafteo\n pulsa 'Escape'" + "</color>");
 
         for (int i = 0; i < numberOfSlots; i++)
         {
-            Rect slotRect = new Rect(i * 30 + 400, 30 + 75, 25, 25);
+            Rect slotRect = new Rect(i * 30 + 500, 30 + 75, 25, 25);
             GUI.Box(slotRect, "", skin.GetStyle("Slot"));
             slotsToCraft[i] = inventoryToCraft[i];
 
@@ -156,7 +156,7 @@ public class CraftSystem : MonoBehaviour {
 
     void CraftItems()
     {
-        Rect slotRect = new Rect(525, 75 + 60, 30, 30);
+        Rect slotRect = new Rect(625, 75 + 60, 30, 30);
         GUI.Box(slotRect, "", skin.GetStyle("Slot"));
 
         //Roasted Fruits
