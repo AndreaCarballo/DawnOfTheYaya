@@ -128,6 +128,9 @@ public class CamaraControl : MonoBehaviour
                     BathCamera.enabled = false;
                     MainCamera.enabled = true;
                     break;
+                
+
+                   
             }
 
         }
