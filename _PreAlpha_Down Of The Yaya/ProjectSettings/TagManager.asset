@@ -22,9 +22,9 @@ TagManager:
   - 
   - PostProcessing
   - Roof
-  - 
-  - 
-  - 
+  - Player
+  - Obstacle
+  - Enemy
   - 
   - 
   - 

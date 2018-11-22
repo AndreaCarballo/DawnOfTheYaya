@@ -18,9 +18,9 @@ public class PuntosPatrulla : MonoBehaviour {
 	}
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "npc")
+        if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<ControllerNav>().objetivo = siguientePunto; //cambiarle el objetivo a other que en este caso es npc
+            other.gameObject.GetComponent<ZombieAgent>().objetivo = siguientePunto; //cambiarle el objetivo a other que en este caso es npc
         }
     }
 }
