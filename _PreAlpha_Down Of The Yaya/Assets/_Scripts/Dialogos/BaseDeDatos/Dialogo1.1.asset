@@ -11,7 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0e31de5d5631a41b7cd55a1bc29085, type: 3}
   m_Name: Dialogo1.1
   m_EditorClassIdentifier: 
-  dialogo: ay si no? Si no es por nosotras los chicos a saber que comen
+  dialogo: Ayy hija, si no es por nosotras los chicos a saber que comen.
   respuestas:
-  - respuesta: Pues bolleria y pizzas ya sabes , bueno chula te dejo que ando liada
+  - respuesta: "Pues boller\xEDa y pizzas ya sabes. Bueno chula, te dejo que ando
+      liada."
     proximoDialogo: {fileID: 11400000, guid: 2d142d2536ee502439443956a4635afa, type: 2}

@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0e31de5d5631a41b7cd55a1bc29085, type: 3}
   m_Name: dialogo 1.1.1.12
   m_EditorClassIdentifier: 
-  dialogo: Dale recuerdos de mi parte a Maikel
+  dialogo: Dale recuerdos de mi parte a Maikel.
   respuestas: []

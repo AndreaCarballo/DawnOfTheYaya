@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf0e31de5d5631a41b7cd55a1bc29085, type: 3}
-  m_Name: Telefono
+  m_Name: Telefono2
   m_EditorClassIdentifier: 
-  dialogo: "Fijo que paso algo malo ... deber\xEDa ir hasta alli"
+  dialogo: "\xA1Ser\xE1 posible que no me coja el tel\xE9fono a estas horas!"
   respuestas: []

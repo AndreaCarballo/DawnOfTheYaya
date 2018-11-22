@@ -10,6 +10,7 @@ TagManager:
   - Inventory
   - Interactable
   - ChangeCamera
+  - ExitCollider
   layers:
   - Default
   - TransparentFX

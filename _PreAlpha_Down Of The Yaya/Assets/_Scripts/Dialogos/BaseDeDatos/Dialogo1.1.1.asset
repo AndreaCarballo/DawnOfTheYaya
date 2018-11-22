@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0e31de5d5631a41b7cd55a1bc29085, type: 3}
   m_Name: Dialogo1.1.1
   m_EditorClassIdentifier: 
-  dialogo: Perdona Lupe a veces tienes un genio...
+  dialogo: Perdona Lupe, a veces tienes un genio...
   respuestas: []

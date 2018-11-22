@@ -14,10 +14,13 @@ public class ObjectInteract : MonoBehaviour
     private GameObject playerObject;
     private bool activeInteract = false;
     private float prevSpeed;
+    private GameObject lifeHUD;
+    private GameObject mainCamera;
 
     //Visible Variables
     public Texture2D cursorTextureHand;
     public Inventory inventory;
+    public GameObject endPreAlphaMenu;
     #endregion
 
 
@@ -27,6 +30,8 @@ public class ObjectInteract : MonoBehaviour
         firstColor = gameObject.GetComponent<Renderer>().material.color;
         playerObject = GameObject.FindGameObjectWithTag("Player");
         prevSpeed = playerObject.GetComponent<NavMeshAgent>().speed;
+        lifeHUD = GameObject.Find("HealthUI");
+        mainCamera = GameObject.Find("MainCamera");
     }
 
     // Update is called once per frame
@@ -47,6 +52,12 @@ public class ObjectInteract : MonoBehaviour
                     break;
                 case "RoastedFruits":
                     inventory.AddItemByID(3);
+                    break;
+                case "Taxi":
+                    //End of PreAlpha
+                    Destroy(playerObject);
+                    endPreAlphaMenu.SetActive(true);
+                    lifeHUD.SetActive(false);
                     break;
             }
 

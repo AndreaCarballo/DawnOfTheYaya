@@ -12,12 +12,14 @@ public class Dialogo : MonoBehaviour {
 
     public GameObject paneldeDialogo;
 
+    public bool enOfDialog;
+
 
     // Use this for initialization
     void Start () {
         dialogoController = FindObjectOfType<DialogoController>();
-        
-	}
+        enOfDialog = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -46,6 +48,7 @@ public class Dialogo : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             paneldeDialogo.SetActive(false);
+            enOfDialog = true;
         }
     }
 

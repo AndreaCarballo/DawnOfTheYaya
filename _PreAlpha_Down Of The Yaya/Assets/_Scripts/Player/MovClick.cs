@@ -13,7 +13,9 @@ public class MovClick : MonoBehaviour {
     private GameObject mGameObject;
     private float previousVelocity;
 
+
     //Visible Variables
+    public bool sawIntroduction;
     #endregion
 
 
@@ -24,6 +26,7 @@ public class MovClick : MonoBehaviour {
         myNavMeshAgent = GetComponent<NavMeshAgent>();
         myNavMeshAgent.angularSpeed = 360;
         previousVelocity = myNavMeshAgent.speed;
+        sawIntroduction = false;
     }
 	
 	// Update is called once per frame
@@ -46,6 +49,36 @@ public class MovClick : MonoBehaviour {
             StopMovement();
         }
 
+    }
+
+    void OnGUI()
+    {
+        if(!Input.GetKey(KeyCode.F1) && !sawIntroduction)
+        {
+            myNavMeshAgent.speed = 0f;
+            Rect backgroundRect = new Rect(200, 775, 925, 55);
+            GUI.Box(backgroundRect, "\n Por favor, antes de empezar mantenga pulsado F1 para acceder a los controles de juego");
+        }
+        if (Input.GetKey(KeyCode.F1))
+        {
+            Rect backgroundRect = new Rect(175, 375, 925, 300);
+            GUI.Box(backgroundRect,
+            "<color=#fff>" + "\n\nCONTROLES DE JUGADOR:"+ "</color>" + "\nMovimiento con" + " <color=#ce5100>" + "click derecho" + "</color>"
+            + "\nInteracción (Atacar, coger objetos e interactuar con el entorno) " + "<color=#00ce4f>" + "click izquierdo" + "</color>"
+            + "\nMarcar opciones de diálogo con " + "<color=#00ce4f>" + "click izquierdo" + "</color>"
+            + "\nAcceder al inventario con la letra " + "<color=#00bdce>" + "\"I\" "+"</color>"
+            + "\nMovimiento en sigilo con la tecla " + " <color=#00bdce>" + "\"Shift\" "+"</color>"
+            + "\nDetener el movimiento con la tecla " + " <color=#00bdce>" + "\"Espacio\" " + "</color>"
+            + "<color=#fff>" + "\n\nCONTROLES DE CÁMARA (en exteriores):" + "</color>" 
+            + "\nPara rotar hacia la derecha pulsar la tecla " + " <color=#00bdce>" + "\"D\" " + "</color>"
+            + "\nPara rotar hacia la izquierda pulsar la tecla " + " <color=#00bdce>" + "\"A\" " + "</color>"
+            + "\nPara ascender la vista pulsar la tecla " + " <color=#00bdce>" + "\"W\" " + "</color>"
+            + "\nPara descender la vista pulsar la tecla " + " <color=#00bdce>" + "\"S\" " + "</color>"
+            + "\nPara rotar la vista al ángulo complementario pulsar la tecla " + " <color=#00bdce>" + "\"X\" " + "</color>"
+            + "\nPara cambiar el ángulo de vista pulsar la tecla " + " <color=#00bdce>" + "\"Z\" " + "</color>");
+            myNavMeshAgent.speed = previousVelocity;
+            sawIntroduction = true;
+        }
     }
 
     #region Methods

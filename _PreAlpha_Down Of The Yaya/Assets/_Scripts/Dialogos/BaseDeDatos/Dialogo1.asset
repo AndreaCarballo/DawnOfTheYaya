@@ -11,11 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0e31de5d5631a41b7cd55a1bc29085, type: 3}
   m_Name: Dialogo1
   m_EditorClassIdentifier: 
-  dialogo: Lupe, a donde vas tan fresca.
+  dialogo: "Lupe, a d\xF3nde vas tan fresca?"
   respuestas:
-  - respuesta: Pues a llevarle algo de comer a mi nieto
+  - respuesta: Pues a llevarle algo de comer a mi nieto.
     proximoDialogo: {fileID: 11400000, guid: 6d2065e0cb1dfe64397ac858c2563dd0, type: 2}
-  - respuesta: Mira que eres pesada hija
+  - respuesta: Mira que eres pesada hija.
     proximoDialogo: {fileID: 11400000, guid: 6b9f90ec42d5de14e83caf2474307b76, type: 2}
-  - respuesta: "Marcho que te\xF1o que marchar"
+  - respuesta: "Marcho que te\xF1o que marchar."
     proximoDialogo: {fileID: 11400000, guid: 7b2a0c77fcd6252439651e21d4cab16e, type: 2}

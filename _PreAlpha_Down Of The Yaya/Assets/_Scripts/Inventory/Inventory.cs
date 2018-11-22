@@ -199,7 +199,7 @@ public class Inventory : MonoBehaviour {
         }
     }
 
-    void RemoveItemByID(int id)
+    public void RemoveItemByID(int id)
     {
         for (int i=0; i < inventory.Count; i++)
         {
@@ -211,7 +211,7 @@ public class Inventory : MonoBehaviour {
         }
     }
 
-    bool InventoryContains(int id)
+    public bool InventoryContains(int id)
     {
         foreach (Item item in inventory)
         {

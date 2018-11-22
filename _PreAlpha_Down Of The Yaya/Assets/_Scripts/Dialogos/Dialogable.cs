@@ -18,21 +18,22 @@ public class Dialogable : MonoBehaviour {
 
     //Visible Variables
     public Texture2D cursorTextureHand;
+    public bool objectTouched;
    
     // Use this for initialization
     void Start () {
         firstColor = gameObject.GetComponent<Renderer>().material.color;
         playerObject = GameObject.FindGameObjectWithTag("Player");
         prevSpeed = playerObject.GetComponent<NavMeshAgent>().speed;
+        objectTouched = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
         if (Vector3.Distance(playerObject.transform.position, transform.position) <= 2 && activeInteract)
         {
-            print("hey");
-
             //Aqui va el codigo que queremos para tratar la accion con el objeto
+            objectTouched = true;
             activeInteract = false;
         }
     }
