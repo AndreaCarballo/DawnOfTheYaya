@@ -17,6 +17,9 @@ public class CamaraControl : MonoBehaviour
     public GameObject player;
     public GameObject transitionTarget;
     public GameObject transitionTarget2;
+    public GameObject paneltransicionTaxi;
+    public GameObject paneltransicionEnemy;
+    public GameObject paneltransicionMainCamera;
 
     //Private variables
     private Vector3 initialCamPos;
@@ -44,6 +47,9 @@ public class CamaraControl : MonoBehaviour
         initialCamPos = MainCamera.transform.position;
         taxi = GameObject.Find("Taxi");
         player = GameObject.FindGameObjectWithTag("Player");
+        paneltransicionTaxi.SetActive(false);
+        paneltransicionEnemy.SetActive(false);
+        paneltransicionMainCamera.SetActive(false);
     }
 
     void LateUpdate()
@@ -55,6 +61,7 @@ public class CamaraControl : MonoBehaviour
             {
                 activateTransitionCamera = false;
                 activateTransitionCamera2 = true;
+                paneltransicionTaxi.SetActive(false);
             }
             player.GetComponent<NavMeshAgent>().isStopped = true;
         }
@@ -65,6 +72,7 @@ public class CamaraControl : MonoBehaviour
             {
                 activateTransitionCamera2 = false;
                 activateTransitionCamera3 = true;
+                paneltransicionEnemy.SetActive(false);
             }
             player.GetComponent<NavMeshAgent>().isStopped = true;
         }
@@ -76,6 +84,7 @@ public class CamaraControl : MonoBehaviour
                 activateTransitionCamera3 = false;
                 MainCamera.enabled = true;
                 TaxiCamera.enabled = false;
+                paneltransicionMainCamera.SetActive(false);
                 CinematicDone = true;
             }
             player.GetComponent<NavMeshAgent>().isStopped = true;
@@ -204,6 +213,9 @@ public class CamaraControl : MonoBehaviour
                     MainCamera.enabled = false;
                     if (CinematicDone)
                     {
+                        paneltransicionTaxi.SetActive(false);
+                        paneltransicionEnemy.SetActive(false);
+                        paneltransicionMainCamera.SetActive(false);
                         MainCamera.enabled = true;
                         TaxiCamera.enabled = false;
                         activateTransitionCamera = false;
@@ -219,16 +231,19 @@ public class CamaraControl : MonoBehaviour
     {
         TaxiCamera.transform.position = Vector3.Lerp(TaxiCamera.transform.position,
                 transitionTarget.transform.position, 0.35f * Time.deltaTime);
+        paneltransicionTaxi.SetActive(true);
     }
     void TransitionEnemyCamera()
     {
         TaxiCamera.transform.position = Vector3.Lerp(TaxiCamera.transform.position,
                 transitionTarget2.transform.position, 0.45f * Time.deltaTime);
+        paneltransicionEnemy.SetActive(true);
     }
     void TransitionMainCamera()
     {
         TaxiCamera.transform.position = Vector3.Lerp(TaxiCamera.transform.position,
                 MainCamera.transform.position, 0.45f * Time.deltaTime);
+        paneltransicionMainCamera.SetActive(true);
     }
 
 }
