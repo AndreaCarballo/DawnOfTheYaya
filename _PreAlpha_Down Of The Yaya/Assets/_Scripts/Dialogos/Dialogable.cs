@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Dialogable : MonoBehaviour {
 
@@ -13,6 +14,7 @@ public class Dialogable : MonoBehaviour {
     private GameObject playerObject;
     private bool activeInteract = false;
     public GameObject panelDialogos;
+    private float prevSpeed;
 
     //Visible Variables
     public Texture2D cursorTextureHand;
@@ -21,6 +23,7 @@ public class Dialogable : MonoBehaviour {
     void Start () {
         firstColor = gameObject.GetComponent<Renderer>().material.color;
         playerObject = GameObject.FindGameObjectWithTag("Player");
+        prevSpeed = playerObject.GetComponent<NavMeshAgent>().speed;
     }
 	
 	// Update is called once per frame
@@ -48,7 +51,15 @@ public class Dialogable : MonoBehaviour {
         {
             playerObject.GetComponent<MovClick>().SetTargetPositionAndMove();
             activeInteract = true;
-          
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            playerObject.GetComponent<NavMeshAgent>().speed = 0f;
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            playerObject.GetComponent<NavMeshAgent>().speed = prevSpeed;
+            playerObject.GetComponent<NavMeshAgent>().SetPath(new NavMeshPath());
         }
     }
 
