@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class DialogoController : MonoBehaviour {
 
@@ -14,15 +15,21 @@ public class DialogoController : MonoBehaviour {
 
     private bool dialogoActivo = false;
 
-    DialogoNPC dialogos;
-	// Use this for initialization
-	
+    private float prevSpeed;
 
-    
-    void Update()
-      
+    private GameObject player;
+
+    DialogoNPC dialogos;
+    // Use this for initialization
+
+    void Start()
     {
-    
+        player = GameObject.FindGameObjectWithTag("Player");
+        prevSpeed = player.GetComponent<NavMeshAgent>().speed;
+    }
+
+    void Update()
+    {
 		if(Input.GetMouseButtonDown(0) && dialogoActivo)
         {
             if (dialogos.respuestas.Length > 0)
@@ -34,11 +41,11 @@ public class DialogoController : MonoBehaviour {
                 dialogoActivo = false;
                 paneldeDialogo.SetActive(false);
                 dialogoNPC.gameObject.SetActive(false);
-                
-               
+                player.GetComponent<NavMeshAgent>().speed = prevSpeed;
             }
         }
 	}
+
     void MostrarRespuestas()
     {
         dialogoNPC.gameObject.SetActive(false);
@@ -48,13 +55,13 @@ public class DialogoController : MonoBehaviour {
             GameObject tempRespuesta = Instantiate(respuesta, paneldeDialogo.transform) as GameObject;
             tempRespuesta.GetComponent<Text>().text = dialogos.respuestas[i].respuesta;
             tempRespuesta.GetComponent<RespuestaButton>().Setup(dialogos.respuestas[i]);
-
         }
     }
 
 
     public void ProximoDialogo(DialogoNPC dialogo)
     {
+        player.GetComponent<NavMeshAgent>().speed = 0f;
         dialogos = dialogo;
         QuitarRespuestas();
 

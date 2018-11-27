@@ -56,12 +56,12 @@ public class MovClick : MonoBehaviour {
         if(!Input.GetKey(KeyCode.F1) && !sawIntroduction)
         {
             myNavMeshAgent.speed = 0f;
-            Rect backgroundRect = new Rect(200, 775, 925, 55);
+            Rect backgroundRect = new Rect(Screen.width / 8, Screen.height / 1.25f, 925, 55);
             GUI.Box(backgroundRect, "\n Por favor, antes de empezar mantenga pulsado F1 para acceder a los controles de juego");
         }
         if (Input.GetKey(KeyCode.F1))
         {
-            Rect backgroundRect = new Rect(175, 375, 925, 300);
+            Rect backgroundRect = new Rect(Screen.width / 8, Screen.height / 3, 925, 300);
             GUI.Box(backgroundRect,
             "<color=#fff>" + "\n\nCONTROLES DE JUGADOR:"+ "</color>" + "\nMovimiento con" + " <color=#ce5100>" + "click derecho" + "</color>"
             + "\nInteracción (Atacar, coger objetos e interactuar con el entorno) " + "<color=#00ce4f>" + "click izquierdo" + "</color>"

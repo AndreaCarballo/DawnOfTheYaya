@@ -27,6 +27,7 @@ public class CamaraControl : MonoBehaviour
     private bool activateTransitionCamera2;
     private bool activateTransitionCamera3;
     private bool CinematicDone;
+    private bool CinematicDoing;
     private GameObject taxi;
 
     // Use this for initialization
@@ -44,9 +45,10 @@ public class CamaraControl : MonoBehaviour
         activateTransitionCamera2 = false;
         activateTransitionCamera3 = false;
         CinematicDone = false;
-        initialCamPos = MainCamera.transform.position;
+        CinematicDoing = false;
         taxi = GameObject.Find("Taxi");
         player = GameObject.FindGameObjectWithTag("Player");
+        initialCamPos = TaxiCamera.transform.position;
         paneltransicionTaxi.SetActive(false);
         paneltransicionEnemy.SetActive(false);
         paneltransicionMainCamera.SetActive(false);
@@ -79,7 +81,7 @@ public class CamaraControl : MonoBehaviour
         if (activateTransitionCamera3 && !CinematicDone)
         {
             TransitionMainCamera();
-            if (Vector3.Distance(TaxiCamera.transform.position, MainCamera.transform.position) <= 0.25)
+            if (Vector3.Distance(TaxiCamera.transform.position, initialCamPos) <= 0.25 && CinematicDoing)
             {
                 activateTransitionCamera3 = false;
                 MainCamera.enabled = true;
@@ -241,8 +243,9 @@ public class CamaraControl : MonoBehaviour
     }
     void TransitionMainCamera()
     {
+        CinematicDoing = true;
         TaxiCamera.transform.position = Vector3.Lerp(TaxiCamera.transform.position,
-                MainCamera.transform.position, 0.45f * Time.deltaTime);
+                initialCamPos, 0.45f * Time.deltaTime);
         paneltransicionMainCamera.SetActive(true);
     }
 

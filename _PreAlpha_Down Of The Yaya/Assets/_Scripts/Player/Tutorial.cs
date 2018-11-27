@@ -55,7 +55,7 @@ public class Tutorial : MonoBehaviour {
     {
         if (sawIntroduction && !objectTouched)
         {
-            Rect backgroundRect = new Rect(200, 775, 925, 75);
+            Rect backgroundRect = new Rect(Screen.width / 8, Screen.height / 1.25f, 925, 75);
             GUI.Box(backgroundRect, "\n Debería coger el teléfono y llamar a mi nieto, hace mucho que no sé de él. Últimamente la juventud anda más alocada de lo normal,\n" +
                 " no hay más que ver la televisión.");
             helpPlayer = false;
@@ -65,20 +65,20 @@ public class Tutorial : MonoBehaviour {
 
         if (objectTouched && endOfDialog && !helpPlayer && !EndTuto)
         {
-            Rect backgroundRect = new Rect(200, 775, 925, 75);
+            Rect backgroundRect = new Rect(Screen.width / 8, Screen.height / 1.25f, 925, 75);
             GUI.Box(backgroundRect, "\n Seguro que se quedó dormido y no fue a trabajar, será gandul!. Vamos minino! hay que llevarle una tarta, seguro que le sienta bien una visita.\n" +
                 "Ay este muchacho.. con lo mal que tengo yo las verticales.");
         }
 
         if(helpPlayer && contHelp <= 2 && endOfDialog && !EndTuto)
         {
-            Rect backgroundRect = new Rect(200, 775, 925, 55);
+            Rect backgroundRect = new Rect(Screen.width / 8, Screen.height / 1.25f, 925, 55);
             GUI.Box(backgroundRect, "\n Mistol filliño, casi me olvido.. Deberíamos hacer la tarta para Maikel");
         }
 
         if (helpPlayer && contHelp > 2 && endOfDialog && !EndTuto)
         {
-            Rect backgroundRect = new Rect(200, 775, 925, 55);
+            Rect backgroundRect = new Rect(Screen.width / 8, Screen.height / 1.25f, 925, 55);
             GUI.Box(backgroundRect, "\n Para hacer la tarta, si no recuerdo mal, necesitaba plátanos y manzanas.");
         }
     }

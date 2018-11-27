@@ -54,7 +54,7 @@ public class PlayerHealth : MonoBehaviour {
     void Death()
     {
         isDead = true; //jugador muerto
-      //  FindObjectOfType<AudioManagerGame>().Play("death");
+        //FindObjectOfType<AudioManagerGame>().Play("death");
         Destroy(this.gameObject, 0f);
         Destroy(gato.gameObject, 0f);
         MenuGameOver.SetActive(true);
