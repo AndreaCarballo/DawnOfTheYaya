@@ -16,11 +16,15 @@ public class ObjectInteract : MonoBehaviour
     private float prevSpeed;
     private GameObject lifeHUD;
     private GameObject mainCamera;
+    private bool playSound;
 
     //Visible Variables
     public Texture2D cursorTextureHand;
     public Inventory inventory;
     public GameObject endPreAlphaMenu;
+    public AudioClip pickClip;
+    public GameObject taxiEndMusic;
+    public GameObject ambientSound;
     #endregion
 
 
@@ -32,6 +36,7 @@ public class ObjectInteract : MonoBehaviour
         prevSpeed = playerObject.GetComponent<NavMeshAgent>().speed;
         lifeHUD = GameObject.Find("HealthUI");
         mainCamera = GameObject.Find("MainCamera");
+        playSound = false;
     }
 
     // Update is called once per frame
@@ -43,19 +48,25 @@ public class ObjectInteract : MonoBehaviour
             {
                 case "Apple":
                     inventory.AddItemByID(0);
+                    playSound = true;
                     break;
                 case "Brocoli":
                     inventory.AddItemByID(1);
+                    playSound = true;
                     break;
                 case "Bananas":
                     inventory.AddItemByID(2);
+                    playSound = true;
                     break;
                 case "RoastedFruits":
                     inventory.AddItemByID(3);
+                    playSound = true;
                     break;
                 case "Taxi":
                     //End of PreAlpha
                     Destroy(playerObject);
+                    ambientSound.SetActive(false);
+                    taxiEndMusic.SetActive(true);
                     endPreAlphaMenu.SetActive(true);
                     lifeHUD.SetActive(false);
                     break;
@@ -63,11 +74,20 @@ public class ObjectInteract : MonoBehaviour
 
             activeInteract = false;
             Cursor.SetCursor(null, Vector2.zero, cursorMode);
+            if(playSound)
+                PlaySound();
             Destroy(gameObject); 
         }
     }
 
     #region Methods
+
+    void PlaySound()
+    {
+        playerObject.GetComponent<AudioSource>().PlayOneShot(pickClip,0.6f);
+        playSound = false;
+    }
+
     void OnMouseOver()
     {
         //Linearly interpolates between colors a and b by time.

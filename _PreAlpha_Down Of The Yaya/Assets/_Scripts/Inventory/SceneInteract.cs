@@ -37,6 +37,7 @@ public class SceneInteract : MonoBehaviour
         {
             goCraft = false;
             playerObject.GetComponent<NavMeshAgent>().isStopped = false;
+            transform.GetComponent<AudioSource>().enabled = false;
         }
 
         if (Vector3.Distance(playerObject.transform.position, transform.position) <= 2 && activeInteract)
@@ -44,6 +45,7 @@ public class SceneInteract : MonoBehaviour
             playerObject.GetComponent<NavMeshAgent>().isStopped = true;
             goCraft = true;
             activeInteract = false;
+            transform.GetComponent<AudioSource>().enabled = true;
         }
     }
 

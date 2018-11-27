@@ -12,16 +12,16 @@ public class Dialogo : MonoBehaviour {
 
     public bool enOfDialog;
 
-    public GameObject player;
-
     private bool objectTouched;
 
+    public AudioClip cogerClip;
+    public AudioClip beepClip;
+    public AudioClip colgarClip;
 
     // Use this for initialization
     void Start () {
         dialogoController = FindObjectOfType<DialogoController>();
         enOfDialog = false;
-        player = GameObject.FindGameObjectWithTag("Player");
     }
 	
 	// Update is called once per frame
@@ -36,6 +36,11 @@ public class Dialogo : MonoBehaviour {
         {
             enOfDialog = false;
             dialogoController.ProximoDialogo(dialogo[0]);
+            if (transform.gameObject.name == "Telefono")
+            {
+                transform.GetComponent<AudioSource>().PlayOneShot(cogerClip,0.5f);
+                transform.GetComponent<AudioSource>().PlayOneShot(beepClip, 0.6f);
+            }
         }
     }
 
@@ -45,6 +50,10 @@ public class Dialogo : MonoBehaviour {
         {
             paneldeDialogo.SetActive(false);
             enOfDialog = true;
+            if (transform.gameObject.name == "Telefono")
+            {
+                transform.GetComponent<AudioSource>().PlayOneShot(colgarClip, 0.5f);
+            }
         }
     }
 

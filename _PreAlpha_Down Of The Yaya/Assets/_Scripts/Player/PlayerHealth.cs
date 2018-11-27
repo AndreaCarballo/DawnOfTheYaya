@@ -18,7 +18,14 @@ public class PlayerHealth : MonoBehaviour {
     public GameObject gato;
     bool isDead;
     bool damage;
+    
+    public GameObject gameOverSound;
+    public GameObject ambientSound;
 
+    private void Start()
+    {
+        
+    }
 
     private void Awake()
     {
@@ -55,9 +62,12 @@ public class PlayerHealth : MonoBehaviour {
     {
         isDead = true; //jugador muerto
         //FindObjectOfType<AudioManagerGame>().Play("death");
-        Destroy(this.gameObject, 0f);
-        Destroy(gato.gameObject, 0f);
+        
+        ambientSound.SetActive(false);
+        gameOverSound.SetActive(true);
         MenuGameOver.SetActive(true);
+        //Destroy(this.gameObject, 0f);
+        //Destroy(gato.gameObject, 0f);
     }
 
 

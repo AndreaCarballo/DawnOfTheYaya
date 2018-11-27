@@ -20,12 +20,14 @@ public class CraftSystem : MonoBehaviour {
     private GameObject player;
     private bool goCraft;
     private Item itemCrafted = null;
+    private bool playSoundCraft;
 
     //Visible Variables
     public List<Item> slotsToCraft = new List<Item>();
     public List<Item> inventoryToCraft = new List<Item>();
     public int numberOfSlots;
     public GUISkin skin;
+    public AudioClip soundCraft;
 
     #endregion
 
@@ -49,6 +51,7 @@ public class CraftSystem : MonoBehaviour {
         draggingItem = false;
         showToolTip = false;
         craftItems = false;
+        playSoundCraft = false;
     }
 	
 	// Update is called once per frame
@@ -56,7 +59,9 @@ public class CraftSystem : MonoBehaviour {
         goCraft = sceneInteractScript.goCraft;
 
         if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown("return") && goCraft)
+        {
             craftItems = true;
+        }
     }
 
     void OnGUI()
@@ -77,6 +82,12 @@ public class CraftSystem : MonoBehaviour {
         if (craftItems && goCraft)
         {
             CraftItems();
+            if (itemCrafted != null && playSoundCraft)
+            {
+                transform.GetComponent<AudioSource>().PlayOneShot(soundCraft, 0.7f);
+                playSoundCraft = false;
+            }
+                
             if (showToolTip)
                 GUI.Box(new Rect(Event.current.mousePosition.x + 200f, Event.current.mousePosition.y, 300, 200), toolTip);
         }
@@ -163,7 +174,8 @@ public class CraftSystem : MonoBehaviour {
         //Roasted Fruits
         if (InventoryToCraftContains(0) && InventoryToCraftContains(2)) //Apple and Banana
         {
-                itemCrafted = itemDatabase.myItemList[3];
+            itemCrafted = itemDatabase.myItemList[3];
+            playSoundCraft = true;
         }
             
 
