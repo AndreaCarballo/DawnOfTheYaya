@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3267,7 +3267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1755581440}
-  path: Assets/Matrix/matrix1.json
+  path: Matrix/matrix1.json
   walkingSpeed: 90
   xStartPosition: 0
   yStartPosition: 0
@@ -33854,7 +33854,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.156}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.3388841}
-  m_AnchoredPosition: {x: 0.100097656, y: -19.243591}
+  m_AnchoredPosition: {x: 0.100097656, y: -19.243622}
   m_SizeDelta: {x: 473.38623, y: -32.778656}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1313205489
@@ -34596,7 +34596,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.156}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.3388841}
-  m_AnchoredPosition: {x: 0.100097656, y: -19.243591}
+  m_AnchoredPosition: {x: 0.100097656, y: -19.243622}
   m_SizeDelta: {x: 473.38623, y: -32.778656}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1355915180
@@ -45392,7 +45392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1755581440}
-  path: Assets/Matrix/matrix0.json
+  path: Matrix/matrix0.json
   walkingSpeed: 90
   xStartPosition: 0
   yStartPosition: 0
@@ -53665,7 +53665,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.156}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.3388841}
-  m_AnchoredPosition: {x: 0.100097656, y: -19.243591}
+  m_AnchoredPosition: {x: 0.100097656, y: -19.243622}
   m_SizeDelta: {x: 473.38623, y: -32.778656}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2124570614

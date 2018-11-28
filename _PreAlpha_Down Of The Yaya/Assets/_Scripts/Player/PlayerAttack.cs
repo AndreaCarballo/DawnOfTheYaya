@@ -11,12 +11,14 @@ public class PlayerAttack : MonoBehaviour {
     GameObject enemy;
     EnemyHealth enemyHealth;
     bool enemyinRange;
+    private Animator animPlayer;
 
     private void Awake()
     {
             enemy = GameObject.FindGameObjectWithTag("Enemy");
             enemyHealth = enemy.GetComponent<EnemyHealth>();
-   
+            animPlayer = GetComponent<Animator>();
+
     }
     public void OnTriggerEnter(Collider other)
     {
@@ -56,7 +58,8 @@ public class PlayerAttack : MonoBehaviour {
     {
         timer = 0f; //reiniciamos contador tiempo 
         if (enemyHealth.currentHealth > 0) //tiene vida el enemigo? 
-        {            
+        {
+            animPlayer.SetTrigger("AttackHuman");
             enemyHealth.TakeDamage(Damage); //hacemos daño
         }
     }

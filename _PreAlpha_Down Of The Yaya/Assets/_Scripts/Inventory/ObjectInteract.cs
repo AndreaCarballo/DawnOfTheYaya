@@ -17,6 +17,7 @@ public class ObjectInteract : MonoBehaviour
     private GameObject lifeHUD;
     private GameObject mainCamera;
     private bool playSound;
+    private Animator anim;
 
     //Visible Variables
     public Texture2D cursorTextureHand;
@@ -37,6 +38,7 @@ public class ObjectInteract : MonoBehaviour
         lifeHUD = GameObject.Find("HealthUI");
         mainCamera = GameObject.Find("MainCamera");
         playSound = false;
+        anim = playerObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -49,18 +51,22 @@ public class ObjectInteract : MonoBehaviour
                 case "Apple":
                     inventory.AddItemByID(0);
                     playSound = true;
+                    anim.SetTrigger("PickObject");
                     break;
                 case "Brocoli":
                     inventory.AddItemByID(1);
                     playSound = true;
+                    anim.SetTrigger("PickObject");
                     break;
                 case "Bananas":
                     inventory.AddItemByID(2);
                     playSound = true;
+                    anim.SetTrigger("PickObject");
                     break;
                 case "RoastedFruits":
                     inventory.AddItemByID(3);
                     playSound = true;
+                    anim.SetTrigger("PickObject");
                     break;
                 case "Taxi":
                     //End of PreAlpha

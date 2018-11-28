@@ -12,6 +12,8 @@ public class MovClick : MonoBehaviour {
     private Rigidbody myRigidbody;
     private GameObject mGameObject;
     private float previousVelocity;
+    private Animator anim;
+    private Vector3 goal;
 
 
     //Visible Variables
@@ -27,11 +29,16 @@ public class MovClick : MonoBehaviour {
         myNavMeshAgent.angularSpeed = 360;
         previousVelocity = myNavMeshAgent.speed;
         sawIntroduction = false;
+        anim = GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        if(transform.position.x == goal.x && transform.position.z == goal.z)
+        {
+            anim.SetTrigger("IdleHuman");
+        }
         if (Input.GetMouseButton(1))
             SetTargetPositionAndMove();
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -85,6 +92,7 @@ public class MovClick : MonoBehaviour {
     public void StopMovement()
     {
         myNavMeshAgent.SetPath(new NavMeshPath());
+        anim.SetTrigger("WalkHuman");
     }
     public void SetTargetPositionAndMove()
     {
@@ -95,6 +103,8 @@ public class MovClick : MonoBehaviour {
         {
             setTarget = hit.point;
             myNavMeshAgent.SetDestination(setTarget);
+            goal = setTarget;
+            anim.SetTrigger("WalkHuman");
         }
     }
     #endregion

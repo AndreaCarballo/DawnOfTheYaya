@@ -12,6 +12,7 @@ public class ZombieAgent : MonoBehaviour
     private NavMeshAgent nav;
     System.Random random = new System.Random();
     public string path;
+    private Animator anim;
 
     //movement variables
     public float walkingSpeed;
@@ -71,6 +72,7 @@ public class ZombieAgent : MonoBehaviour
         FOVMesh.name = "FOV Mesh";
         FOVMeshFilter.mesh = FOVMesh;
         nav = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
 
     }
 
@@ -140,6 +142,7 @@ public class ZombieAgent : MonoBehaviour
 
     void Patrol()
     {
+        anim.SetTrigger("Patrol");
         transform.LookAt(objetivo.position + Vector3.up * transform.position.y); //look at player's last position
         Vector3 point = Vector3.MoveTowards(transform.position, objetivo.position, walkingSpeed * Time.fixedDeltaTime);
         nav.SetDestination(point);
@@ -309,10 +312,12 @@ public class ZombieAgent : MonoBehaviour
                 
                 transform.LookAt(lastPosition + Vector3.up * transform.position.y); //look at player's last position
                 Vector3 point = Vector3.MoveTowards(transform.position, lastPosition, walkingSpeed * Time.fixedDeltaTime);
+                anim.SetTrigger("Walk");
                 nav.SetDestination(point);
             }
             else
             {
+                anim.SetTrigger("Idle");
                 Debug.Log("end seen");
                 seen = false;
             }
@@ -328,10 +333,12 @@ public class ZombieAgent : MonoBehaviour
             
             transform.LookAt(lastPositionHeard + Vector3.up * transform.position.y); //look at player's last position
             Vector3 point = Vector3.MoveTowards(transform.position, lastPositionHeard, walkingSpeed * Time.fixedDeltaTime);
+            anim.SetTrigger("Walk");
             nav.SetDestination(point);
         }
         else
         {
+            anim.SetTrigger("Idle");
             Debug.Log("end heard");
             heard = false;
         }
@@ -519,7 +526,7 @@ public class ZombieAgent : MonoBehaviour
 
     void Move(int inputVal)
     {
-
+        anim.SetTrigger("Walk");
         if (inputVal == 0) //forward
         {
             Vector3 point = Vector3.MoveTowards(transform.position, player.transform.position, walkingSpeed * Time.fixedDeltaTime);

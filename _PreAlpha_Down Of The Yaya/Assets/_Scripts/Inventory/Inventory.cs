@@ -17,6 +17,7 @@ public class Inventory : MonoBehaviour {
     private GameObject craftStation;
     private bool goCraft;
     private GameObject playerObject;
+    private Animator anim;
 
     //Visible Variables
     public List<Item> inventory = new List<Item>();
@@ -31,6 +32,7 @@ public class Inventory : MonoBehaviour {
         itemDatabase = GameObject.FindGameObjectWithTag("ItemDatabase").GetComponent<ItemDatabase>();
         craftStation = GameObject.Find("CraftStation");
         playerObject = GameObject.FindGameObjectWithTag("Player");
+        anim = playerObject.GetComponent<Animator>();
 
         for (int i=0; i < (slotsX * slotsY); i++)
         {
@@ -122,6 +124,7 @@ public class Inventory : MonoBehaviour {
                         }
                         if (Input.GetKeyDown(KeyCode.U)) //Aumentar vida si pulsamos la U mientras tenemos el raton encima
                         {
+                            anim.SetTrigger("Eat");
                             playerObject.GetComponent<PlayerHealth>().TakeLife(inventory[i].itemPower);
                             inventory[i] = new Item();
                         }

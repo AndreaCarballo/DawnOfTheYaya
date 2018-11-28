@@ -13,12 +13,15 @@ public class EnemyAttack : MonoBehaviour {
     float timer; //tiempo que pasa desde el ultimo ataque
     EnemyHealth enemyHealth;
 
+    private Animator animZombie;
+
 
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealth>();
+        animZombie = GetComponent<Animator>();
     }
 
    
@@ -58,6 +61,7 @@ public class EnemyAttack : MonoBehaviour {
         timer = 0f; //reiniciamos contador tiempo 
         if (playerHealth.currentHealth > 0) //tiene vida el jugador? 
         {
+            animZombie.SetTrigger("Attack");
             playerHealth.TakeDamage(attackDamage); //hacemos daño
         }
     }

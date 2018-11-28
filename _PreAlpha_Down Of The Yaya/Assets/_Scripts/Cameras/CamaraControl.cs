@@ -29,6 +29,7 @@ public class CamaraControl : MonoBehaviour
     private bool CinematicDone;
     private bool CinematicDoing;
     private GameObject taxi;
+    private Animator anim;
 
     // Use this for initialization
     void Start()
@@ -52,6 +53,7 @@ public class CamaraControl : MonoBehaviour
         paneltransicionTaxi.SetActive(false);
         paneltransicionEnemy.SetActive(false);
         paneltransicionMainCamera.SetActive(false);
+        anim = player.GetComponent<Animator>();
     }
 
     void LateUpdate()
@@ -231,6 +233,7 @@ public class CamaraControl : MonoBehaviour
 
     void TransitionTaxiCamera()
     {
+        anim.SetTrigger("IdleHuman");
         TaxiCamera.transform.position = Vector3.Lerp(TaxiCamera.transform.position,
                 transitionTarget.transform.position, 0.35f * Time.deltaTime);
         paneltransicionTaxi.SetActive(true);

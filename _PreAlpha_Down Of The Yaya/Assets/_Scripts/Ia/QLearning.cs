@@ -168,6 +168,11 @@ public class QLearning
 
     public void SaveMatrix()
     {
+        if (!Directory.Exists(Path.Combine(Application.persistentDataPath, "/Matrix")))
+        {
+            Directory.CreateDirectory(Application.persistentDataPath + "/Matrix");
+        }
+
         List<QMatrix> listStates = new List<QMatrix>();
         List<QMatrix> listActions = new List<QMatrix>();
         for (int i = 0; i < QStates.Count; i++)
@@ -180,8 +185,9 @@ public class QLearning
 
         Game data = new Game(listStates, listActions);
 
-        using (StreamWriter stream = new StreamWriter(path))
+        using (StreamWriter stream = new StreamWriter(Path.Combine(Application.persistentDataPath, path)))
         {
+            Debug.Log("saved at " + Path.Combine(Application.persistentDataPath, path));
             string json = JsonUtility.ToJson(data);
             stream.Write(json);
         }
@@ -190,12 +196,19 @@ public class QLearning
 
     public void LoadMatrix()
     {
-        if (File.Exists(path))
+        string pathLoad = Path.Combine(Application.dataPath, path);
+
+        if (File.Exists(Path.Combine(Application.persistentDataPath, path)))
         {
-            Debug.Log("usando matriz");
+            pathLoad = Path.Combine(Application.persistentDataPath, path);
+        }
+
+        if (File.Exists(pathLoad))
+        {
             Game data;
-            using (StreamReader stream = new StreamReader(path))
+            using (StreamReader stream = new StreamReader(pathLoad))
             {
+                Debug.Log("loaded from " + pathLoad);
                 string json = stream.ReadToEnd();
                 data = JsonUtility.FromJson<Game>(json);
             }
