@@ -108,7 +108,7 @@ c7dd12c15208b0447e101f80038706df UnityEngine.Timeline.dll:UnityEngine.Timeline.A
 0ddb2c46096a1e59e0dce07886ce4769 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 64f3a13c1277a7f1324321d93d0ec13b UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 66b3109aa5921cf800bec17926c6adba Unity.TextMeshPro.dll:TMPro.TMP_SubMeshUI
-f059ddf35365626ab87ec7a84eea5cf6 Assembly-CSharp.dll:.PlayerHealth
+38a41c3f2d1e4d173ab5ba63aa6c70bc Assembly-CSharp.dll:.PlayerHealth
 201273fb4f889724fb090164b7d6c657 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 486cd95c82d8305219c352c06b776e1f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 0f27c39183b9eb95eba0a228bea28273 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -135,7 +135,7 @@ d75dc834c5dec688db75a55a1724c90f UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 e1ea12ca952c81d81a9a21fdf34446ed UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
 98d69a140ec0084cde3b6a5e09aea295 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
-a9dd983e2990f79265f21c3c6a1a61e9 Assembly-CSharp.dll:.ObjectInteract
+3518695bb46b6a3177e992f259a8f824 Assembly-CSharp.dll:.ObjectInteract
 96f3ea9f23b6f08e60710ebb4af49174 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 d0c240e502d593694716687f6ac1fca4 Assembly-CSharp.dll:.ZombieAgent
 ca86e6ee582f03972b80373086c5b30b Assembly-CSharp.dll:.CamaraControl2
@@ -182,7 +182,7 @@ dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 aac9c55ae7ba4b95b852a7d9c191acd1 Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 1ef1fa4256efa8763ce9170c7e06d4c4 Assembly-CSharp.dll:.Tutorial
 0a006f3734181ba8b26758f0866152c0 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-f8d965d594f19b4a5293dda794de9b72 Assembly-CSharp.dll:.Dialogo
+6dbdb1f68c95fe1d1d9a5446cb2280df Assembly-CSharp.dll:.Dialogo
 6eea4d19b096068cd0099f34d7fe80d3 Assembly-CSharp.dll:.EnemyInteract
 e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 e948c5b902126d093fe08ed808de1621 Assembly-CSharp.dll:.CamaraGato
@@ -193,4 +193,4 @@ d2786c1ddec7bb8b4cc8aae45381a86b Assembly-CSharp.dll:.Inventory
 2098ff8b0f18b260dffc4518e9998e85 Assembly-CSharp.dll:.Dialogable
 cfb172796d42cf04d2c640ca13bac9a4 Assembly-CSharp.dll:.DialogoNPC
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
-f92a122cc371bfd968eacb7d574b1bfc Assembly-CSharp.dll:.CraftSystem
+ada017e25cc4f5488e72937e1d29201d Assembly-CSharp.dll:.CraftSystem

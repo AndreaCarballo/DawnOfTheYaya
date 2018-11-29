@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1789,7 +1789,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243531139095149320, guid: c181230740b81234a8a57ce45fdbcc13,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 60754d9760fa7374eab5ccb455a8bdd3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f230c8672f1af214f83deea756ea52b9, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.69
   m_Pitch: 1
@@ -17044,7 +17044,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 632378952}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -38.1, y: -28.04, z: -21.68}
+  m_LocalPosition: {x: -36.5, y: -28.04, z: -21.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 486565550}
@@ -17062,7 +17062,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: f37ee68c7c20a884da97a6c6b39cedfa, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.54
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -17071,7 +17071,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 26.878426
+  MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -17106,7 +17106,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.45
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -17158,7 +17158,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 13cc962a77fe2964190d6111638676f8, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.65
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -17167,7 +17167,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 26.848244
+  MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -17229,7 +17229,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.45
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -33854,7 +33854,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.156}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.3388841}
-  m_AnchoredPosition: {x: 0.100097656, y: -19.243622}
+  m_AnchoredPosition: {x: 0.100097656, y: -19.243652}
   m_SizeDelta: {x: 473.38623, y: -32.778656}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1313205489
@@ -34596,7 +34596,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.156}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.3388841}
-  m_AnchoredPosition: {x: 0.100097656, y: -19.243622}
+  m_AnchoredPosition: {x: 0.100097656, y: -19.243652}
   m_SizeDelta: {x: 473.38623, y: -32.778656}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1355915180
@@ -35744,7 +35744,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -44486,7 +44486,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.65
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -53665,7 +53665,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.156}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.3388841}
-  m_AnchoredPosition: {x: 0.100097656, y: -19.243622}
+  m_AnchoredPosition: {x: 0.100097656, y: -19.243652}
   m_SizeDelta: {x: 473.38623, y: -32.778656}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2124570614

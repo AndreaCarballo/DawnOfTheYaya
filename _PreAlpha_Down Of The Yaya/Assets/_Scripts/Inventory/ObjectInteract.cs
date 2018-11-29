@@ -90,7 +90,7 @@ public class ObjectInteract : MonoBehaviour
 
     void PlaySound()
     {
-        playerObject.GetComponent<AudioSource>().PlayOneShot(pickClip,0.6f);
+        playerObject.GetComponent<AudioSource>().PlayOneShot(pickClip,0.7f);
         playSound = false;
     }
 

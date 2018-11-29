@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/andre/Desktop/LastVersion/buildWin/_PreAlpha_Down Of The Yaya.exe
+C:/Users/CARLOS/Desktop/PreAlpha_Dawn_Of_The_Yaya/_PreAlpha_Down Of The Yaya.exe
 SceneListBegin?
 Assets/Main Menu.unity
 Assets/Scene1_preAlpha.unity
