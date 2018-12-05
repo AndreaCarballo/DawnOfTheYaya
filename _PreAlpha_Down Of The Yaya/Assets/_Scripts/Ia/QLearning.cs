@@ -15,6 +15,7 @@ public class QLearning
     private string path;
 
     private int numberPossibleActions; //4: up, down, right, left
+    private bool hearing;
 
     private float[] pastState; //vector that holds the previous state
     private int pastActionIndex; //index of optimal action (0, 1, 2 or 3)
@@ -30,7 +31,7 @@ public class QLearning
     private bool firstIteration;
     System.Random random = new System.Random();
 
-    public QLearning(int possActs, string _path)
+    public QLearning(int possActs, string _path, bool _hearing)
     {
         QStates = new List<float[]>();
         QActions = new List<float[]>();
@@ -38,7 +39,11 @@ public class QLearning
         path = _path;
         LoadMatrix();
         firstIteration = true;
-        
+        hearing = _hearing;
+        if (_hearing)
+        {
+            learningRate = 0.2f;
+        }
     }
 
     /*
@@ -61,15 +66,19 @@ public class QLearning
         bool exists = searchState(currentState, false); //check if current state is stored
         if (exists)
         {
-            //policy e-greedy
-            if (Random.Range(0f, 1f) < e)
+            if (!hearing)
             {
-                pastActionIndex = actionIndex; //we use the randomly generated action
+                //policy e-greedy
+                if (Random.Range(0f, 1f) < e)
+                {
+                    pastActionIndex = actionIndex; //we use the randomly generated action
+                }
+                if (e > eMin)
+                {
+                    e = e - ((1f - eMin) / (float)eSteps);
+                }
             }
-            if (e > eMin)
-            {
-                e = e - ((1f - eMin) / (float)eSteps);
-            }
+            
             return pastActionIndex; //returns the action the agent will take
 
         }
@@ -114,6 +123,10 @@ public class QLearning
                     if (exists) //if the new state is already stored we take into account its optimal action value
                     {
                         actions[pastActionIndex] = (actions[pastActionIndex] + learningRate * (reward + discountFactor * newActionValue - actions[pastActionIndex]));
+                        if (path == "Matrix/hearing1.json")
+                        {
+                            Debug.Log(actions[pastActionIndex]);
+                        }
                     }
 
                     if (!exists) //if it isn't, we don't
@@ -183,11 +196,11 @@ public class QLearning
             listActions.Add(actions);
         }
 
-        Game data = new Game(listStates, listActions);
+        Matrix data = new Matrix(listStates, listActions);
 
         using (StreamWriter stream = new StreamWriter(Path.Combine(Application.persistentDataPath, path)))
         {
-            Debug.Log("saved at " + Path.Combine(Application.persistentDataPath, path));
+            //Debug.Log("saved at " + Path.Combine(Application.persistentDataPath, path));
             string json = JsonUtility.ToJson(data);
             stream.Write(json);
         }
@@ -205,12 +218,12 @@ public class QLearning
 
         if (File.Exists(pathLoad))
         {
-            Game data;
+            Matrix data;
             using (StreamReader stream = new StreamReader(pathLoad))
             {
-                Debug.Log("loaded from " + pathLoad);
+                //Debug.Log("loaded from " + pathLoad);
                 string json = stream.ReadToEnd();
-                data = JsonUtility.FromJson<Game>(json);
+                data = JsonUtility.FromJson<Matrix>(json);
             }
             List<float[]> listStates = new List<float[]>();
             List<float[]> listActions = new List<float[]>();

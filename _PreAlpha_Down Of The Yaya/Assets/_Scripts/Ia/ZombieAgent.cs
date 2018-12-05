@@ -12,6 +12,7 @@ public class ZombieAgent : MonoBehaviour
     private NavMeshAgent nav;
     System.Random random = new System.Random();
     public string path;
+    public string pathHearing;
     private Animator anim;
 
     //movement variables
@@ -22,8 +23,12 @@ public class ZombieAgent : MonoBehaviour
     private Vector3 lastPositionHeard;
     private bool seen = false;
     private bool heard = false;
+    private bool gotHearingAction = false;
+    private int go = 0;
     private bool zombieLeftPast = false;
     private bool zombieRightPast = false;
+    private float soundType;
+    private float lastSoundType = 0f;
 
     //starting variables
     public float xStartPosition;
@@ -39,13 +44,17 @@ public class ZombieAgent : MonoBehaviour
     private bool restartPostion = false;
 
     //reward variables
-    QLearning QL; //4 possible actions
+    QLearning QL; //3 possible actions
+    QLearning QLHearing; //2 possible actions
     private bool positiveTrigger = false;
     public float positiveReward = 10f; //reward when it hits the player
     public float negativeReward = -10f;
     public float timePunishment = -0.5f; //punishment for each update
     public float distanceReward = 1f; //reward when it gets close
     private float currentReward = 0f;
+    private float rewardHearing = 0f;
+    public float wrongSound = -1f;
+    public float rightSound = 1f;
 
     //FOV variables
     public float FOVRadius; //how far ahead the agent can see
@@ -55,6 +64,7 @@ public class ZombieAgent : MonoBehaviour
     public LayerMask playerLayer;
     public LayerMask obstacleLayer;
     public LayerMask enemyLayer;
+    public LayerMask soundLayer;
     public float FOVMeshResolution; //how many rays we cast out to draw the FOV per degree
     public int edgeResolveIterations; //number of iterations to find the closest point to the edge of an obstacle
     public float edgeDistance; //minimum distance between hits to do edge detection and avoid problems when the rays hit two different obstacles
@@ -66,7 +76,8 @@ public class ZombieAgent : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        QL = new QLearning(3, path);
+        QL = new QLearning(3, path, false);
+        QLHearing = new QLearning(2, pathHearing, true);
         rb = GetComponent<Rigidbody>();
         FOVMesh = new Mesh();
         FOVMesh.name = "FOV Mesh";
@@ -81,10 +92,9 @@ public class ZombieAgent : MonoBehaviour
 
         bool inView = false;
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, FOVRadius, playerLayer);
-
-        for (int i = 0; i < targetsInViewRadius.Length; i++)
+        if (targetsInViewRadius.Length != 0)
         {
-            Transform target = targetsInViewRadius[i].transform;
+            Transform target = targetsInViewRadius[0].transform;
             Vector3 dirToTarget = (target.position - transform.position).normalized;
             if (Vector3.Angle(transform.forward, dirToTarget) < FOVAngle / 2)
             {
@@ -99,23 +109,42 @@ public class ZombieAgent : MonoBehaviour
             }
         }
 
+
         if (!inView)
         {
-            float hearingDistance = HearingRange();
-            if (hearingDistance < hearingRadius)
+            Collider[] hearingObjects = Physics.OverlapSphere(transform.position, hearingRadius, soundLayer | playerLayer);
+            if (hearingObjects.Length != 0)
             {
-                heard = true;
-                lastPositionHeard = player.transform.position;
+                float hearingDistance = HearingRange(hearingObjects[0].transform.position);
+                AudioSource audioTarget = GameObject.FindGameObjectWithTag(hearingObjects[0].name).GetComponent<AudioSource>();
+                if (hearingDistance < hearingRadius && audioTarget.isPlaying)
+                {
+                    heard = true;
+                    switch (hearingObjects[0].name)
+                    {
+                        case "Player":
+                            soundType = 1f;
+                            break;
+                        case "Botella":
+                            soundType = 2f;
+                            break;
+                        case "Roca":
+                            soundType = 3f;
+                            break;
+                    }
+                    lastPositionHeard = hearingObjects[0].transform.position;
+                }
             }
 
-            if (seen)
-            {
-                AgentBehaviorSight(false);
-            }
-            else
+
+
             if (heard)
             {
                 AgentBehaviorHearing();
+            }
+            else if (seen)
+            {
+                AgentBehaviorSight(false);
             }
             else
             {
@@ -153,7 +182,21 @@ public class ZombieAgent : MonoBehaviour
     {
         if (inView)
         {
-            
+            if (heard)
+            {
+                gotHearingAction = false;
+                lastSoundType = 0;
+                heard = false;
+                Debug.Log("hearing went great");
+                rewardHearing += rightSound;
+                float[] qStateHear = new float[4];
+                qStateHear[0] = 0f;
+                qStateHear[1] = 0f;
+                qStateHear[2] = 0f;
+                qStateHear[3] = 0f;
+                QLHearing.getAction(qStateHear, rewardHearing);
+                rewardHearing = 0f;
+            }
             lastPosition = player.transform.position;
             transform.LookAt(player.transform.position + Vector3.up * transform.position.y);
             //The state of the world is the relative position of the zombie to the player
@@ -309,7 +352,7 @@ public class ZombieAgent : MonoBehaviour
 
             if (lastPosition != transform.position)
             {
-                
+
                 transform.LookAt(lastPosition + Vector3.up * transform.position.y); //look at player's last position
                 Vector3 point = Vector3.MoveTowards(transform.position, lastPosition, walkingSpeed * Time.fixedDeltaTime);
                 anim.SetTrigger("Walk");
@@ -330,14 +373,48 @@ public class ZombieAgent : MonoBehaviour
     {
         if (lastPositionHeard != transform.position)
         {
+            if (!gotHearingAction || soundType != lastSoundType)
+            {
+                lastSoundType = soundType;
+                gotHearingAction = true;
+                float[] qState = new float[4];
+                qState[0] = soundType;
+                qState[1] = 0f;
+                qState[2] = 0f;
+                qState[3] = 0f;
+                go = QLHearing.getAction(qState, rewardHearing);
+                rewardHearing = 0f;
+            }
             
-            transform.LookAt(lastPositionHeard + Vector3.up * transform.position.y); //look at player's last position
-            Vector3 point = Vector3.MoveTowards(transform.position, lastPositionHeard, walkingSpeed * Time.fixedDeltaTime);
-            anim.SetTrigger("Walk");
-            nav.SetDestination(point);
+            if (go == 1)
+            {
+                Debug.Log("go to hearing");
+                transform.LookAt(lastPositionHeard + Vector3.up * transform.position.y); //look at player's last position
+                Vector3 point = Vector3.MoveTowards(transform.position, lastPositionHeard, walkingSpeed * Time.fixedDeltaTime);
+                anim.SetTrigger("Walk");
+                nav.SetDestination(point);
+            } else
+            {
+                gotHearingAction = false;
+                lastSoundType = 0;
+                anim.SetTrigger("Idle");
+                Debug.Log("didnt go");
+                heard = false;
+            }
+            
         }
         else
         {
+            gotHearingAction = false;
+            lastSoundType = 0;
+            rewardHearing += wrongSound;
+            float[] qState = new float[4];
+            qState[0] = 0f;
+            qState[1] = 0f;
+            qState[2] = 0f;
+            qState[3] = 0f;
+            QLHearing.getAction(qState, rewardHearing);
+            rewardHearing = 0f;
             anim.SetTrigger("Idle");
             Debug.Log("end heard");
             heard = false;
@@ -472,18 +549,18 @@ public class ZombieAgent : MonoBehaviour
         return new EdgeInfo(minPoint, maxPoint);
     }
 
-    public float HearingRange()
+    public float HearingRange(Vector3 position)
     {
         NavMeshPath path = new NavMeshPath();
 
         if (nav.enabled)
         {
-            nav.CalculatePath(player.transform.position, path);
+            nav.CalculatePath(position, path);
         }
 
         Vector3[] allWayPoints = new Vector3[path.corners.Length + 2];
         allWayPoints[0] = transform.position;
-        allWayPoints[allWayPoints.Length - 1] = player.transform.position;
+        allWayPoints[allWayPoints.Length - 1] = position;
 
         for (int i = 0; i < path.corners.Length; i++)
         {

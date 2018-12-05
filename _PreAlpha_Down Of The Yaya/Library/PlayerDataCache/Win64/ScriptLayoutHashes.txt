@@ -1,11 +1,11 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/CARLOS/Desktop/PreAlpha_Dawn_Of_The_Yaya/_PreAlpha_Down Of The Yaya.exe
+C:/Users/andre/Desktop/LastVersion/buildwindows/_PreAlpha_Down Of The Yaya.exe
 SceneListBegin?
 Assets/Main Menu.unity
 Assets/Scene1_preAlpha.unity
 SceneListEnd?
-0a63f3c67144f28e16df0bc259fef3d4 Assembly-CSharp.dll:.MovClick
+15027649cfc2bf384cab4b31cca99070 Assembly-CSharp.dll:.MovClick
 c15bf1eeb6168ef341d6f2f2658c4ed5 Assembly-CSharp.dll:.EnemyAttack
 c422dd62785a6d0afa870fbd111886ce Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
 7b803eb2910e9b4cd5e521ae07b9f7d6 Unity.TextMeshPro.dll:TMPro.TMP_Dropdown
@@ -137,7 +137,7 @@ e1ea12ca952c81d81a9a21fdf34446ed UnityEngine.HoloLens.dll:UnityEngine.EventSyste
 dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 3518695bb46b6a3177e992f259a8f824 Assembly-CSharp.dll:.ObjectInteract
 96f3ea9f23b6f08e60710ebb4af49174 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
-d0c240e502d593694716687f6ac1fca4 Assembly-CSharp.dll:.ZombieAgent
+f23244562a40d9cc36916222dca0388b Assembly-CSharp.dll:.ZombieAgent
 ca86e6ee582f03972b80373086c5b30b Assembly-CSharp.dll:.CamaraControl2
 14feacd6da815008a8adec8c1d46b9ee Assembly-CSharp.dll:.ItemDatabase
 f16835701e71dd5d6fb1fed4b7aff1d8 Unity.TextMeshPro.dll:TMPro.TMP_Asset

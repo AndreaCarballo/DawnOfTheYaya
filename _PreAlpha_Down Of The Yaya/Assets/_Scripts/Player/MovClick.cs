@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MovClick : MonoBehaviour {
+public class MovClick : MonoBehaviour
+{
 
     #region Variables
     //Variables
@@ -14,15 +15,19 @@ public class MovClick : MonoBehaviour {
     private float previousVelocity;
     private Animator anim;
     private Vector3 goal;
+    private AudioSource audio;
+    private bool stealth = false;
 
 
     //Visible Variables
     public bool sawIntroduction;
+    public AudioClip steps;
     #endregion
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         myRigidbody = GetComponent<Rigidbody>();
         myRigidbody.constraints = RigidbodyConstraints.FreezeAll;
         myNavMeshAgent = GetComponent<NavMeshAgent>();
@@ -30,21 +35,35 @@ public class MovClick : MonoBehaviour {
         previousVelocity = myNavMeshAgent.speed;
         sawIntroduction = false;
         anim = GetComponent<Animator>();
+        audio = GetComponent<AudioSource>();
+        audio.loop = true;
+        audio.clip = steps;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-        if(transform.position.x == goal.x && transform.position.z == goal.z)
+        if (transform.position.x == goal.x && transform.position.z == goal.z)
         {
             anim.SetTrigger("IdleHuman");
+            audio.Stop();
         }
         if (Input.GetMouseButton(1))
             SetTargetPositionAndMove();
         if (Input.GetKeyDown(KeyCode.LeftShift))
-            myNavMeshAgent.speed = myNavMeshAgent.speed/2;
+        {
+            myNavMeshAgent.speed = myNavMeshAgent.speed / 2;
+            audio.Stop();
+            stealth = true;
+        }
+
         if (Input.GetKeyUp(KeyCode.LeftShift))
-            myNavMeshAgent.speed = myNavMeshAgent.speed*2;
+        {
+            myNavMeshAgent.speed = myNavMeshAgent.speed * 2;
+            audio.Play();
+            stealth = false;
+        }
+
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -60,7 +79,7 @@ public class MovClick : MonoBehaviour {
 
     void OnGUI()
     {
-        if(!Input.GetKey(KeyCode.F1) && !sawIntroduction)
+        if (!Input.GetKey(KeyCode.F1) && !sawIntroduction)
         {
             myNavMeshAgent.speed = 0f;
             Rect backgroundRect = new Rect(Screen.width / 8, Screen.height / 1.25f, 925, 55);
@@ -70,13 +89,13 @@ public class MovClick : MonoBehaviour {
         {
             Rect backgroundRect = new Rect(Screen.width / 8, Screen.height / 3, 925, 300);
             GUI.Box(backgroundRect,
-            "<color=#fff>" + "\n\nCONTROLES DE JUGADOR:"+ "</color>" + "\nMovimiento con" + " <color=#ce5100>" + "click derecho" + "</color>"
+            "<color=#fff>" + "\n\nCONTROLES DE JUGADOR:" + "</color>" + "\nMovimiento con" + " <color=#ce5100>" + "click derecho" + "</color>"
             + "\nInteracción (Atacar, coger objetos e interactuar con el entorno) " + "<color=#00ce4f>" + "click izquierdo" + "</color>"
             + "\nMarcar opciones de diálogo con " + "<color=#00ce4f>" + "click izquierdo" + "</color>"
-            + "\nAcceder al inventario con la letra " + "<color=#00bdce>" + "\"I\" "+"</color>"
-            + "\nMovimiento en sigilo con la tecla " + " <color=#00bdce>" + "\"Shift\" "+"</color>"
+            + "\nAcceder al inventario con la letra " + "<color=#00bdce>" + "\"I\" " + "</color>"
+            + "\nMovimiento en sigilo con la tecla " + " <color=#00bdce>" + "\"Shift\" " + "</color>"
             + "\nDetener el movimiento con la tecla " + " <color=#00bdce>" + "\"Espacio\" " + "</color>"
-            + "<color=#fff>" + "\n\nCONTROLES DE CÁMARA (en exteriores):" + "</color>" 
+            + "<color=#fff>" + "\n\nCONTROLES DE CÁMARA (en exteriores):" + "</color>"
             + "\nPara rotar hacia la derecha pulsar la tecla " + " <color=#00bdce>" + "\"D\" " + "</color>"
             + "\nPara rotar hacia la izquierda pulsar la tecla " + " <color=#00bdce>" + "\"A\" " + "</color>"
             + "\nPara ascender la vista pulsar la tecla " + " <color=#00bdce>" + "\"W\" " + "</color>"
@@ -93,11 +112,15 @@ public class MovClick : MonoBehaviour {
     {
         myNavMeshAgent.SetPath(new NavMeshPath());
         anim.SetTrigger("WalkHuman");
+        if (!audio.isPlaying && !stealth)
+        {
+            audio.Play();
+        }
     }
     public void SetTargetPositionAndMove()
     {
-    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
         {
@@ -105,6 +128,11 @@ public class MovClick : MonoBehaviour {
             myNavMeshAgent.SetDestination(setTarget);
             goal = setTarget;
             anim.SetTrigger("WalkHuman");
+            if (!audio.isPlaying && !stealth)
+            {
+                audio.Play();
+            }
+
         }
     }
     #endregion
