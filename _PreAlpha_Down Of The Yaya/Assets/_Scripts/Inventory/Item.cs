@@ -44,7 +44,7 @@ public class Item
         itemName = name;
         itemID = ID;
         itemDescription = descript;
-        itemIcon = Resources.Load<Texture2D>("Item Icons/" + itemName);
+        itemIcon = Resources.Load<Texture2D>("Item Icons/"+itemName);
         itemType = type;
     }
 

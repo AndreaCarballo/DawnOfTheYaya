@@ -7,12 +7,7 @@ public class CamaraControl : MonoBehaviour
 {
     //Public variables
     public Camera MainCamera;
-    public Camera GarageCamera;
-    public Camera LivRoomCamera;
-    public Camera KitchenCamera;
-    public Camera GardenCamera;
-    public Camera BathCamera;
-    public Camera StairsCamera;
+    public Camera inCamera;
     public Camera TaxiCamera;
     public GameObject player;
     public GameObject transitionTarget;
@@ -31,23 +26,20 @@ public class CamaraControl : MonoBehaviour
     private GameObject taxi;
     private Animator anim;
     private AudioSource audio;
+    private GameObject[] objects;
 
     // Use this for initialization
     void Start()
     {
-        LivRoomCamera.enabled = true;
-        GarageCamera.enabled = false;
+        inCamera.enabled = true;
         TaxiCamera.enabled = false;
-        StairsCamera.enabled = false;
-        KitchenCamera.enabled = false;
-        GardenCamera.enabled = false;
-        BathCamera.enabled = false;
         MainCamera.enabled = false;
         activateTransitionCamera = false;
         activateTransitionCamera2 = false;
         activateTransitionCamera3 = false;
         CinematicDone = false;
         CinematicDoing = false;
+        objects = GameObject.FindGameObjectsWithTag("Transparent");
         taxi = GameObject.Find("Taxi");
         player = GameObject.FindGameObjectWithTag("Player");
         initialCamPos = TaxiCamera.transform.position;
@@ -107,115 +99,31 @@ public class CamaraControl : MonoBehaviour
         {
             switch (other.name)
             {
-                case "TargetGarage":
-                    LivRoomCamera.enabled = false;
+                case "TargetIN":
+                    inCamera.enabled = true;
                     TaxiCamera.enabled = false;
                     activateTransitionCamera = false;
-                    GarageCamera.enabled = true;
-                    StairsCamera.enabled = false;
-                    KitchenCamera.enabled = false;
-                    GardenCamera.enabled = false;
-                    BathCamera.enabled = false;
                     MainCamera.enabled = false;
+                    for(int i=0; i<objects.Length; i++)
+                    {
+                        objects[i].SetActive(false);
+                    }
                     break;
-                case "TargetBath":
-                    LivRoomCamera.enabled = false;
+                case "TargetOUT":
+                    inCamera.enabled = true;
                     TaxiCamera.enabled = false;
                     activateTransitionCamera = false;
-                    GarageCamera.enabled = false;
-                    StairsCamera.enabled = false;
-                    KitchenCamera.enabled = false;
-                    GardenCamera.enabled = false;
-                    BathCamera.enabled = true;
-                    MainCamera.enabled = false;
-                    break;
-                case "TargetLivRoom":
-                    LivRoomCamera.enabled = true;
-                    TaxiCamera.enabled = false;
-                    activateTransitionCamera = false;
-                    GarageCamera.enabled = false;
-                    StairsCamera.enabled = false;
-                    KitchenCamera.enabled = false;
-                    GardenCamera.enabled = false;
-                    BathCamera.enabled = false;
-                    MainCamera.enabled = false;
-                    break;
-                case "TargetLivRoom2":
-                    LivRoomCamera.enabled = true;
-                    TaxiCamera.enabled = false;
-                    activateTransitionCamera = false;
-                    GarageCamera.enabled = false;
-                    StairsCamera.enabled = false;
-                    KitchenCamera.enabled = false;
-                    GardenCamera.enabled = false;
-                    BathCamera.enabled = false;
-                    MainCamera.enabled = false;
-                    break;
-                case "TargetLivRoom3":
-                    LivRoomCamera.enabled = true;
-                    TaxiCamera.enabled = false;
-                    activateTransitionCamera = false;
-                    GarageCamera.enabled = false;
-                    StairsCamera.enabled = false;
-                    KitchenCamera.enabled = false;
-                    GardenCamera.enabled = false;
-                    BathCamera.enabled = false;
-                    MainCamera.enabled = false;
-                    break;
-                case "TargetStairs":
-                    LivRoomCamera.enabled = false;
-                    TaxiCamera.enabled = false;
-                    activateTransitionCamera = false;
-                    GarageCamera.enabled = false;
-                    StairsCamera.enabled = true;
-                    KitchenCamera.enabled = false;
-                    GardenCamera.enabled = false;
-                    BathCamera.enabled = false;
-                    MainCamera.enabled = false;
-                    break;
-                case "TargetKitchen":
-                    LivRoomCamera.enabled = false;
-                    TaxiCamera.enabled = false;
-                    activateTransitionCamera = false;
-                    GarageCamera.enabled = false;
-                    StairsCamera.enabled = false;
-                    KitchenCamera.enabled = true;
-                    GardenCamera.enabled = false;
-                    BathCamera.enabled = false;
-                    MainCamera.enabled = false;
-                    break;
-                case "TargetKitchen2":
-                    LivRoomCamera.enabled = false;
-                    TaxiCamera.enabled = false;
-                    activateTransitionCamera = false;
-                    GarageCamera.enabled = false;
-                    StairsCamera.enabled = false;
-                    KitchenCamera.enabled = true;
-                    GardenCamera.enabled = false;
-                    BathCamera.enabled = false;
-                    MainCamera.enabled = false;
-                    break;
-                case "TargetGarden":
-                    LivRoomCamera.enabled = false;
-                    TaxiCamera.enabled = false;
-                    activateTransitionCamera = false;
-                    GarageCamera.enabled = false;
-                    StairsCamera.enabled = false;
-                    KitchenCamera.enabled = false;
-                    GardenCamera.enabled = true;
-                    BathCamera.enabled = false;
                     MainCamera.enabled = false;
                     break;
                 case "TargetExterior":
+                    for (int i = 0; i < objects.Length; i++)
+                    {
+                        objects[i].SetActive(true);
+                    }
                     MainCamera.transform.position = initialCamPos;
-                    LivRoomCamera.enabled = false;
+                    inCamera.enabled = false;
                     TaxiCamera.enabled = true;
                     activateTransitionCamera = true;
-                    GarageCamera.enabled = false;
-                    StairsCamera.enabled = false;
-                    KitchenCamera.enabled = false;
-                    GardenCamera.enabled = false;
-                    BathCamera.enabled = false;
                     MainCamera.enabled = false;
                     if (CinematicDone)
                     {

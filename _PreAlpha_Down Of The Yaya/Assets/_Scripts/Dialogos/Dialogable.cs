@@ -17,6 +17,7 @@ public class Dialogable : MonoBehaviour {
     private float prevSpeed;
 
     //Visible Variables
+    public Texture2D cursorTexture;
     public Texture2D cursorTextureHand;
     public bool objectTouched;
    
@@ -67,7 +68,7 @@ public class Dialogable : MonoBehaviour {
     void OnMouseExit()
     {
         gameObject.GetComponent<Renderer>().material.color = firstColor;
-        Cursor.SetCursor(null, Vector2.zero, cursorMode);
+        Cursor.SetCursor(cursorTexture, Vector2.zero, cursorMode);
     }
 
    

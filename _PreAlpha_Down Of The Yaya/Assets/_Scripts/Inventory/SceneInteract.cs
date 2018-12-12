@@ -17,6 +17,7 @@ public class SceneInteract : MonoBehaviour
 
     //Visible Variables
     public Texture2D cursorTextureHand;
+    public Texture2D cursorTexture;
     public bool goCraft;
     #endregion
 
@@ -80,7 +81,7 @@ public class SceneInteract : MonoBehaviour
     void OnMouseExit()
     {
         gameObject.GetComponent<Renderer>().material.color = firstColor;
-        Cursor.SetCursor(null, Vector2.zero, cursorMode);
+        Cursor.SetCursor(cursorTexture, Vector2.zero, cursorMode);
     }
     #endregion
 }

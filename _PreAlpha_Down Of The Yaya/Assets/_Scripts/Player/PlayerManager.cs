@@ -29,7 +29,6 @@ private void Awake()
 
 public void TakeDamage(int amount)
 {
-    Debug.Log("EN JUGADOR");
     currentHealth -= amount; //decrementamos salud en la cantidad
     healthSlider.value = currentHealth;
     //Actualizamos slider de vida

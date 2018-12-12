@@ -9,6 +9,7 @@ public class MovClick : MonoBehaviour
     #region Variables
     //Variables
     private NavMeshAgent myNavMeshAgent;
+    private CursorMode cursorMode = CursorMode.ForceSoftware;
     private Vector3 setTarget;
     private Rigidbody myRigidbody;
     private GameObject mGameObject;
@@ -20,6 +21,7 @@ public class MovClick : MonoBehaviour
 
 
     //Visible Variables
+    public Texture2D cursorTexture;
     public bool sawIntroduction;
     public AudioClip steps;
     #endregion
@@ -38,6 +40,7 @@ public class MovClick : MonoBehaviour
         audio = GetComponent<AudioSource>();
         audio.loop = true;
         audio.clip = steps;
+        Cursor.SetCursor(cursorTexture, Vector2.zero, cursorMode);
     }
 
     // Update is called once per frame

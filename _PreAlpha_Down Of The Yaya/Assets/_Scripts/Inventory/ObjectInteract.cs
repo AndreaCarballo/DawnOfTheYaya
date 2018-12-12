@@ -21,6 +21,7 @@ public class ObjectInteract : MonoBehaviour
 
     //Visible Variables
     public Texture2D cursorTextureHand;
+    public Texture2D cursorTexture;
     public Inventory inventory;
     public GameObject endPreAlphaMenu;
     public AudioClip pickClip;
@@ -84,7 +85,7 @@ public class ObjectInteract : MonoBehaviour
             }
 
             activeInteract = false;
-            Cursor.SetCursor(null, Vector2.zero, cursorMode);
+            Cursor.SetCursor(cursorTexture, Vector2.zero, cursorMode);
             if(playSound)
                 PlaySound();
             Destroy(gameObject); 
@@ -129,7 +130,7 @@ public class ObjectInteract : MonoBehaviour
     void OnMouseExit()
     {
         gameObject.GetComponent<Renderer>().material.color = firstColor;
-        Cursor.SetCursor(null, Vector2.zero, cursorMode);
+        Cursor.SetCursor(cursorTexture, Vector2.zero, cursorMode);
     }
     #endregion
 }

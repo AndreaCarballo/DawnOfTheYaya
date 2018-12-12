@@ -11,6 +11,7 @@ TagManager:
   - Interactable
   - ChangeCamera
   - ExitCollider
+  - Transparent
   layers:
   - Default
   - TransparentFX
