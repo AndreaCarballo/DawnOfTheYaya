@@ -24,7 +24,9 @@ public class ItemDatabase : MonoBehaviour
         myItemList.Add(new Item("roastedFruits", "Frutas horneadas." + "\n" + "Un alimento muy nutritivo que restaurará\n más salud que un ingrediente común" +
             "\n\n" + "\n\n<color=#fb8cff>" + " Para comer, presiona la tecla 'U' \n mientras tienes el cursor encima del objeto" + "</color>",
             3, 10, Item.ItemType.Food));
-
+        myItemList.Add(new Item("bottle", "Botella para utilizar de señuelo." + "\n" +
+          "\n\n" + "\n\n<color=#fb8cff>" + " Para equipar, presiona la tecla 'E' \n mientras tienes el cursor encima del objeto" + "</color>",
+          4, 0, Item.ItemType.Food));
     }
 
 }

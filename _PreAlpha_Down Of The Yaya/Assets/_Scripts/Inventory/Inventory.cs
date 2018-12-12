@@ -18,12 +18,14 @@ public class Inventory : MonoBehaviour {
     private bool goCraft;
     private GameObject playerObject;
     private Animator anim;
+  
 
     //Visible Variables
     public List<Item> inventory = new List<Item>();
     public List<Item> slots = new List<Item>();
     public int slotsX, slotsY;
     public GUISkin skin;
+    public bool isEquiped;
 
     #endregion
 
@@ -128,7 +130,16 @@ public class Inventory : MonoBehaviour {
                             playerObject.GetComponent<PlayerHealth>().TakeLife(inventory[i].itemPower);
                             inventory[i] = new Item();
                         }
-                            
+                        if (Input.GetKeyDown(KeyCode.E)) //Equipar Botella
+                        {
+                            isEquiped = true;
+                              ///////////////////////////////////////////////
+                              /////////////////////////////////////////
+                              ////////////////////////////////////
+                              //////////////////////////////////
+
+                            inventory[i] = new Item();
+                        }
                     }
 
                 } else

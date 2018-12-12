@@ -76,6 +76,11 @@ public class ObjectInteract : MonoBehaviour
                     endPreAlphaMenu.SetActive(true);
                     lifeHUD.SetActive(false);
                     break;
+                case "Bottle":
+                    inventory.AddItemByID(4);
+                    playSound = true;
+                    anim.SetTrigger("PickObject");
+                    break;
             }
 
             activeInteract = false;
