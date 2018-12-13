@@ -33,7 +33,7 @@ public class SceneInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !activeInteract || 
+        if (Input.GetKeyDown(KeyCode.Q) && !activeInteract || 
             (Vector3.Distance(playerObject.transform.position, transform.position) >= 2))
         {
             goCraft = false;

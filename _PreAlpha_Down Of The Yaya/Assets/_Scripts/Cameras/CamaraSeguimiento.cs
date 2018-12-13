@@ -14,12 +14,20 @@ public class CamaraSeguimiento : MonoBehaviour
     private Vector3 UpPos;
     private Vector3 RightPos;
     private Vector3 LeftPos;
+    private bool mov1Y;
+    private bool mov2Y;
+    private bool mov1X;
+    private bool mov2X;
 
 
     // Use this for initialization
     void Start()
     {
         offset = mainCamera.transform.position - player.transform.position;
+        mov1Y = true;
+        mov2Y = false;
+        mov1X = true;
+        mov2X = false;
     }
 
     private void Update()
@@ -70,14 +78,38 @@ public class CamaraSeguimiento : MonoBehaviour
             
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z) && mov1Y)
         {
-            offset = new Vector3(-offset.x,offset.y,offset.z);
+            offset = new Vector3(-offset.x, offset.y, offset.z);
+            mov1Y = false;
+            mov2Y = true;
+            mov1X = false;
+            mov2X = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.Z) && mov2Y)
+        {
+            offset = new Vector3(offset.x, offset.y, -offset.z);
+            mov2Y = false;
+            mov1Y = true;
+            mov2X = false;
+            mov1X = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X) && mov1X)
         {
-            offset = new Vector3(-offset.x, offset.y, -offset.z);
+            offset = new Vector3(offset.x, offset.y, -offset.z);
+            mov1X = false;
+            mov2X = true;
+            mov1X = false;
+            mov2X = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.X) && mov2X)
+        {
+            offset = new Vector3(-offset.x, offset.y, offset.z);
+            mov2X = false;
+            mov1X = true;
+            mov2Y = false;
+            mov1Y = true;
         }
 
         mainCamera.transform.LookAt(player.transform);

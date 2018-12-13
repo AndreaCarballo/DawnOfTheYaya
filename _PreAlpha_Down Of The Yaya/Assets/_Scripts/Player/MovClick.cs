@@ -98,13 +98,9 @@ public class MovClick : MonoBehaviour
             + "\nAcceder al inventario con la letra " + "<color=#00bdce>" + "\"I\" " + "</color>"
             + "\nMovimiento en sigilo con la tecla " + " <color=#00bdce>" + "\"Shift\" " + "</color>"
             + "\nDetener el movimiento con la tecla " + " <color=#00bdce>" + "\"Espacio\" " + "</color>"
-            + "<color=#fff>" + "\n\nCONTROLES DE CÁMARA (en exteriores):" + "</color>"
-            + "\nPara rotar hacia la derecha pulsar la tecla " + " <color=#00bdce>" + "\"D\" " + "</color>"
-            + "\nPara rotar hacia la izquierda pulsar la tecla " + " <color=#00bdce>" + "\"A\" " + "</color>"
-            + "\nPara ascender la vista pulsar la tecla " + " <color=#00bdce>" + "\"W\" " + "</color>"
-            + "\nPara descender la vista pulsar la tecla " + " <color=#00bdce>" + "\"S\" " + "</color>"
-            + "\nPara rotar la vista al ángulo complementario pulsar la tecla " + " <color=#00bdce>" + "\"X\" " + "</color>"
-            + "\nPara cambiar el ángulo de vista pulsar la tecla " + " <color=#00bdce>" + "\"Z\" " + "</color>");
+            + "<color=#fff>" + "\n\nCONTROLES DE CÁMARA:" + "</color>"
+            + "\nPara rotar la cámara hacia la derecha " + " <color=#00bdce>" + "\"X\" " + "</color>"
+            + "\nPara rotar la cámara hacia la izquierda " + " <color=#00bdce>" + "\"Z\" " + "</color>");
             myNavMeshAgent.speed = previousVelocity;
             sawIntroduction = true;
         }
