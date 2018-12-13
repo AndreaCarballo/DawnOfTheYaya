@@ -14,6 +14,7 @@ public class ZombieAgent : MonoBehaviour
     public string path;
     public string pathHearing;
     private Animator anim;
+    public int ID;
 
     //movement variables
     public float walkingSpeed;

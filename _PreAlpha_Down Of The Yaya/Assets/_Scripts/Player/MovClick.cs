@@ -20,6 +20,11 @@ public class MovClick : MonoBehaviour
     private bool stealth = false;
 
 
+    [HideInInspector]
+    public int zone = 0;
+    public float time = 0f;
+
+
     //Visible Variables
     public Texture2D cursorTexture;
     public bool sawIntroduction;
@@ -46,6 +51,7 @@ public class MovClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        time += Time.deltaTime;
         if (transform.position.x == goal.x && transform.position.z == goal.z)
         {
             anim.SetTrigger("IdleHuman");

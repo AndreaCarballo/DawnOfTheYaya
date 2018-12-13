@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour {
     public int Healthstart =100;
     public int currentHealth;
     public int cantidadRestaportiempo = 0;
-     public Slider healthSlider;
+    public Slider healthSlider;
     public Image damageImage;
     //public AudioClip death;
     public float flashSpeed = 5f;
@@ -21,6 +21,9 @@ public class PlayerHealth : MonoBehaviour {
     
     public GameObject gameOverSound;
     public GameObject ambientSound;
+
+    [HideInInspector]
+    public int lifeLost = 0;
 
     private void Start()
     {
@@ -41,6 +44,7 @@ public class PlayerHealth : MonoBehaviour {
     public void TakeDamage(int amount)
     {
         currentHealth -= amount; //decrementamos salud en la cantidad
+        lifeLost += amount;
         healthSlider.value = currentHealth; //Actualizamos slider de vida
         if (currentHealth <= 0 && !isDead) {
             Death();
