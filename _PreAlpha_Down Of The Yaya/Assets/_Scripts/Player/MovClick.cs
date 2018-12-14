@@ -18,6 +18,10 @@ public class MovClick : MonoBehaviour
     private Vector3 goal;
     private AudioSource audio;
     private bool stealth = false;
+    public GameObject pauseMenuUI;
+    public GameObject panelOptions;
+    public GameObject panelControls;
+    public GameObject panelLanguage;
 
 
     [HideInInspector]
@@ -88,7 +92,7 @@ public class MovClick : MonoBehaviour
 
     void OnGUI()
     {
-        if (!Input.GetKey(KeyCode.F1) && !sawIntroduction)
+        if (!Input.GetKey(KeyCode.F1) && !sawIntroduction && !pauseMenuUI.activeSelf && !panelOptions.activeSelf && !panelControls.activeSelf && !panelLanguage.activeSelf)
         {
             myNavMeshAgent.speed = 0f;
             Rect backgroundRect = new Rect(Screen.width / 8, Screen.height / 1.25f, 925, 55);

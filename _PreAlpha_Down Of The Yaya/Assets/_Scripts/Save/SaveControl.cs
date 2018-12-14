@@ -23,6 +23,7 @@ public class SaveControl : MonoBehaviour
 
     public void Save()
     {
+       
         BinaryFormatter binary = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/SaveGame.dat"); //the creates a file in the unity app data path
         Game game = new Game();

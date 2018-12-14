@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
 
-    private bool GameIsPaused = false;
+    public bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject panelOptions;
 	
@@ -43,6 +43,10 @@ public class PauseMenu : MonoBehaviour {
     public void loadMenu()
     {
         SceneManager.LoadScene("Main Menu");
+    }
+    public void loadGa()
+    {
+        Debug.Log("CARGANDO");
     }
     public void QuitGame()
     {

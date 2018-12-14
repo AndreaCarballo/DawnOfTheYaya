@@ -20,6 +20,10 @@ public class Tutorial : MonoBehaviour {
     private GameObject ColliderExteriorD;
     private GameObject ColliderExterior;
     private int contHelp = 0;
+    public GameObject pauseMenuUI;
+    public GameObject panelOptions;
+    public GameObject panelControls;
+    public GameObject panelLanguage;
 
 
     //Visible Variables
@@ -53,7 +57,7 @@ public class Tutorial : MonoBehaviour {
 
     void OnGUI()
     {
-        if (sawIntroduction && !objectTouched)
+        if (sawIntroduction && !objectTouched &&!pauseMenuUI.activeSelf && !panelOptions.activeSelf && !panelControls.activeSelf && !panelLanguage.activeSelf)
         {
             Rect backgroundRect = new Rect(Screen.width / 8, Screen.height / 1.25f, 925, 75);
             GUI.Box(backgroundRect, "\n Debería coger el teléfono y llamar a mi nieto, hace mucho que no sé de él. Últimamente la juventud anda más alocada de lo normal,\n" +
@@ -63,20 +67,20 @@ public class Tutorial : MonoBehaviour {
             contHelp = 0;
         }
 
-        if (objectTouched && endOfDialog && !helpPlayer && !EndTuto)
+        if (objectTouched && endOfDialog && !helpPlayer && !EndTuto && !pauseMenuUI.activeSelf && !panelOptions.activeSelf && !panelControls.activeSelf && !panelLanguage.activeSelf)
         {
             Rect backgroundRect = new Rect(Screen.width / 8, Screen.height / 1.25f, 925, 75);
             GUI.Box(backgroundRect, "\n Seguro que se quedó dormido y no fue a trabajar, será gandul!. Vamos minino! hay que llevarle una tarta, seguro que le sienta bien una visita.\n" +
                 "Ay este muchacho.. con lo mal que tengo yo las verticales.");
         }
 
-        if(helpPlayer && contHelp <= 2 && endOfDialog && !EndTuto)
+        if(helpPlayer && contHelp <= 2 && endOfDialog && !EndTuto && !pauseMenuUI.activeSelf && !panelOptions.activeSelf && !panelControls.activeSelf && !panelLanguage.activeSelf)
         {
             Rect backgroundRect = new Rect(Screen.width / 8, Screen.height / 1.25f, 925, 55);
             GUI.Box(backgroundRect, "\n Mistol filliño, casi me olvido.. Deberíamos hacer la tarta para Maikel");
         }
 
-        if (helpPlayer && contHelp > 2 && endOfDialog && !EndTuto)
+        if (helpPlayer && contHelp > 2 && endOfDialog && !EndTuto && !pauseMenuUI.activeSelf && !panelOptions.activeSelf && !panelControls.activeSelf && !panelLanguage.activeSelf)
         {
             Rect backgroundRect = new Rect(Screen.width / 8, Screen.height / 1.25f, 925, 55);
             GUI.Box(backgroundRect, "\n Para hacer la tarta, si no recuerdo mal, necesitaba plátanos y manzanas.");
