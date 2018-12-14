@@ -72,10 +72,10 @@ public class ObjectInteract : MonoBehaviour
                 case "Taxi":
                     //End of PreAlpha
                     Destroy(playerObject);
-                    ambientSound.SetActive(false);
-                    taxiEndMusic.SetActive(true);
-                    endPreAlphaMenu.SetActive(true);
-                    lifeHUD.SetActive(false);
+                    //ambientSound.SetActive(false);
+                    //taxiEndMusic.SetActive(true);
+                    //endPreAlphaMenu.SetActive(true);
+                    //lifeHUD.SetActive(false);
                     break;
                 case "Bottle":
                     inventory.AddItemByID(4);
@@ -88,7 +88,8 @@ public class ObjectInteract : MonoBehaviour
             Cursor.SetCursor(cursorTexture, Vector2.zero, cursorMode);
             if(playSound)
                 PlaySound();
-            Destroy(gameObject); 
+            if (gameObject.name != "Taxi")
+                Destroy(gameObject); 
         }
     }
 

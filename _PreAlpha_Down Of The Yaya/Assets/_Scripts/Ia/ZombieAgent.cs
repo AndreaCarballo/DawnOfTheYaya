@@ -24,6 +24,8 @@ public class ZombieAgent : MonoBehaviour
     private Vector3 lastPositionHeard;
     private bool seen = false;
     private bool heard = false;
+    private bool turn = false;
+    private int countTurn = 0;
     private bool gotHearingAction = false;
     private int go = 0;
     private bool zombieLeftPast = false;
@@ -149,11 +151,31 @@ public class ZombieAgent : MonoBehaviour
             }
             else
             {
-                Patrol();
+                if (turn)
+                {
+                    if (countTurn <= 1000)
+                    {
+                        countTurn++;
+                    }
+                    else
+                    {
+                        countTurn = 0;
+                        turn = false;
+                        anim.SetTrigger("Idle");
+                    }
+
+                }
+                else
+                {
+                    Patrol();
+                }
+
             }
 
 
         }
+
+
 
 
 
@@ -188,7 +210,6 @@ public class ZombieAgent : MonoBehaviour
                 gotHearingAction = false;
                 lastSoundType = 0;
                 heard = false;
-                Debug.Log("hearing went great");
                 rewardHearing += rightSound;
                 float[] qStateHear = new float[4];
                 qStateHear[0] = 0f;
@@ -331,29 +352,29 @@ public class ZombieAgent : MonoBehaviour
             rb.velocity = Vector3.zero;
         }
 
-        if (restartPostion) //for training
-        {
-            //Patrol();
-            //rb.MovePosition(new Vector3(xStartPosition, yStartPosition, zStartPosition));
-            //transform.rotation = new Quaternion(0, 90, 0, 0);
-            //transform.position = new Vector3(xStartPosition, yStartPosition, zStartPosition);
-            //player.transform.position = new Vector3(random.Next(-xPlayer, xPlayer), yStartPosition, random.Next(-zPlayer, zPlayer));
-            lastPosition = player.transform.position;
-            lastDistance = 0f;
-            restartPostion = false;
-            seen = false;
-            heard = false;
-            Debug.Log("restarting position");
-        }
-        else
+        //if (restartPostion) //for training
+        //{
+        //    //Patrol();
+        //    //rb.MovePosition(new Vector3(xStartPosition, yStartPosition, zStartPosition));
+        //    //transform.rotation = new Quaternion(0, 90, 0, 0);
+        //    //transform.position = new Vector3(xStartPosition, yStartPosition, zStartPosition);
+        //    //player.transform.position = new Vector3(random.Next(-xPlayer, xPlayer), yStartPosition, random.Next(-zPlayer, zPlayer));
+        //    lastPosition = player.transform.position;
+        //    lastDistance = 0f;
+        //    restartPostion = false;
+        //    seen = false;
+        //    heard = false;
+        //    Debug.Log("restarting position");
+        //}
+        //else
 
         if (seen && !inView)
         {
             currentReward += negativeReward;
-
-            if (lastPosition != transform.position)
+            float distSee = Vector3.Distance(lastPosition, transform.position);
+            if (distSee > 1f)
             {
-
+                Debug.Log("go to last position");
                 transform.LookAt(lastPosition + Vector3.up * transform.position.y); //look at player's last position
                 Vector3 point = Vector3.MoveTowards(transform.position, lastPosition, walkingSpeed * Time.fixedDeltaTime);
                 anim.SetTrigger("Walk");
@@ -362,8 +383,10 @@ public class ZombieAgent : MonoBehaviour
             else
             {
                 anim.SetTrigger("Idle");
+                anim.SetTrigger("TurnRight");
                 Debug.Log("end seen");
                 seen = false;
+                turn = true;
             }
         }
 
@@ -372,7 +395,8 @@ public class ZombieAgent : MonoBehaviour
 
     void AgentBehaviorHearing()
     {
-        if (lastPositionHeard != transform.position)
+        float distHear = Vector3.Distance(lastPositionHeard, transform.position);
+        if (distHear > 1f)
         {
             if (!gotHearingAction || soundType != lastSoundType)
             {
@@ -386,7 +410,7 @@ public class ZombieAgent : MonoBehaviour
                 go = QLHearing.getAction(qState, rewardHearing);
                 rewardHearing = 0f;
             }
-            
+
             if (go == 1)
             {
                 Debug.Log("go to hearing");
@@ -394,7 +418,8 @@ public class ZombieAgent : MonoBehaviour
                 Vector3 point = Vector3.MoveTowards(transform.position, lastPositionHeard, walkingSpeed * Time.fixedDeltaTime);
                 anim.SetTrigger("Walk");
                 nav.SetDestination(point);
-            } else
+            }
+            else
             {
                 gotHearingAction = false;
                 lastSoundType = 0;
@@ -402,7 +427,7 @@ public class ZombieAgent : MonoBehaviour
                 Debug.Log("didnt go");
                 heard = false;
             }
-            
+
         }
         else
         {
@@ -417,8 +442,11 @@ public class ZombieAgent : MonoBehaviour
             QLHearing.getAction(qState, rewardHearing);
             rewardHearing = 0f;
             anim.SetTrigger("Idle");
+            anim.SetTrigger("TurnRight");
             Debug.Log("end heard");
+            turn = true;
             heard = false;
+            seen = false;
         }
 
     }
