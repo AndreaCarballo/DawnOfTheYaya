@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10424,6 +10424,47 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: d031e5971c52a2b4d8ec56dbeecf221e,
     type: 3}
   m_PrefabInternal: {fileID: 373680233}
+--- !u!1 &374178873
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 374178875}
+  - component: {fileID: 374178874}
+  m_Layer: 14
+  m_Name: CheckPoint 2
+  m_TagString: CheckPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &374178874
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 374178873}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 15}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &374178875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 374178873}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 28.89, y: 1, z: -52.15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 29
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &376334466
 GameObject:
   m_ObjectHideFlags: 0
@@ -24773,6 +24814,47 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: d031e5971c52a2b4d8ec56dbeecf221e,
     type: 3}
   m_PrefabInternal: {fileID: 891162276}
+--- !u!1 &894151313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 894151315}
+  - component: {fileID: 894151314}
+  m_Layer: 14
+  m_Name: CheckPoint 1
+  m_TagString: CheckPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &894151314
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 894151313}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 15}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &894151315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 894151313}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 28.89, y: 1, z: 15.82}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 28
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &899321625
 GameObject:
   m_ObjectHideFlags: 0
@@ -47096,6 +47178,7 @@ GameObject:
   - component: {fileID: 1755581450}
   - component: {fileID: 1755581452}
   - component: {fileID: 1755581453}
+  - component: {fileID: 1755581455}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -47150,8 +47233,6 @@ MonoBehaviour:
   panelOptions: {fileID: 2097765231}
   panelControls: {fileID: 691652147}
   panelLanguage: {fileID: 1817980967}
-  zone: 0
-  time: 0
   cursorTexture: {fileID: 2800000, guid: 9c6c266c8c817d54e935ffb6b2fd264d, type: 3}
   sawIntroduction: 1
   steps: {fileID: 8300000, guid: 82d63093b8d231a46984ce10f992c9e4, type: 3}
@@ -47419,6 +47500,19 @@ MonoBehaviour:
   player: {fileID: 1755581440}
   mainCamera: {fileID: 1096812844}
   offset: {x: 0, y: 0, z: 0}
+--- !u!114 &1755581455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1755581440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b856057f5e2cded42bf1c965341e9b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zone: 0
+  time: 0
 --- !u!1 &1759141645
 GameObject:
   m_ObjectHideFlags: 0
@@ -53504,9 +53598,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1960658633}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 256a1a3e731ffbb45baee251047e0d62, type: 3}
+  m_Script: {fileID: 11500000, guid: d0ddda8f07319be47ab15d7a819338cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficulty: 1
+  language: 
 --- !u!1 &1961645198
 GameObject:
   m_ObjectHideFlags: 0

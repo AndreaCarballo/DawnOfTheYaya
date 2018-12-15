@@ -153,7 +153,7 @@ public class ZombieAgent : MonoBehaviour
             {
                 if (turn)
                 {
-                    if (countTurn <= 1000)
+                    if (countTurn <= 700)
                     {
                         countTurn++;
                     }

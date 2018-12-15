@@ -12,6 +12,7 @@ TagManager:
   - ChangeCamera
   - ExitCollider
   - Transparent
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
