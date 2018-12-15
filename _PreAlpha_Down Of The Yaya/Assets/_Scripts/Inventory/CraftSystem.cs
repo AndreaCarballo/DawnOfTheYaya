@@ -98,7 +98,7 @@ public class CraftSystem : MonoBehaviour {
     {
         Event ec = Event.current;
 
-        Rect backgroundRect = new Rect(375, 75, 300, 275);
+        Rect backgroundRect = new Rect(75, 375, 300, 275);
         GUI.Box(backgroundRect, "CRAFT SYSTEM" + "\n\n\n\n\n\n\n" + "<color=#fb8cff>"+
             " Para craftear ingredientes arrástralos\n desde tu inventario y pulsa 'Enter'"+ "</color>"
             + "\n\n<color=#fb8cff>" + " Puedes acelerar el proceso haciendo\n click derecho sobre los ingredientes\n" + "</color>" 
@@ -106,7 +106,7 @@ public class CraftSystem : MonoBehaviour {
 
         for (int i = 0; i < numberOfSlots; i++)
         {
-            Rect slotRect = new Rect(i * 30 + 400, 30 + 75, 25, 25);
+            Rect slotRect = new Rect(i * 30 + 100, 30 + 400, 25, 25);
             GUI.Box(slotRect, "", skin.GetStyle("Slot"));
             slotsToCraft[i] = inventoryToCraft[i];
 
@@ -168,7 +168,7 @@ public class CraftSystem : MonoBehaviour {
 
     void CraftItems()
     {
-        Rect slotRect = new Rect(525, 75 + 60, 30, 30);
+        Rect slotRect = new Rect(100 + 150, 400 + 30, 30, 30);
         GUI.Box(slotRect, "", skin.GetStyle("Slot"));
 
         //Roasted Fruits

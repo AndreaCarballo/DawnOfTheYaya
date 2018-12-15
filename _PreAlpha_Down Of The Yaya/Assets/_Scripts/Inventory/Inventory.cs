@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 
 public class Inventory : MonoBehaviour {
 
@@ -23,9 +23,10 @@ public class Inventory : MonoBehaviour {
     //Visible Variables
     public List<Item> inventory = new List<Item>();
     public List<Item> slots = new List<Item>();
+    public Item itemWeapon = new Item();
     public int slotsX, slotsY;
     public GUISkin skin;
-    public bool isEquiped;
+    public GUISkin skin2;
 
     #endregion
 
@@ -42,11 +43,10 @@ public class Inventory : MonoBehaviour {
             inventory.Add(new Item());
         }
 
-        //AddItemByID(0);
-        //AddItemByID(1);
-        //AddItemByID(2);
-        //AddItemByID(3);
-        //RemoveItemByID(0);
+        if (itemWeapon != null)
+        {
+            equipWeapon();
+        }
 
     }
 
@@ -68,6 +68,8 @@ public class Inventory : MonoBehaviour {
         toolTip = "";
         GUI.skin = skin;
 
+        DrawWeapon();
+
         if (showInventory)
         {
             DrawInventory();
@@ -80,6 +82,55 @@ public class Inventory : MonoBehaviour {
             GUI.DrawTexture(new Rect(Event.current.mousePosition.x, Event.current.mousePosition.y, 50, 50), draggedItem.itemIcon);
         }
 
+    }
+
+    void DrawWeapon()
+    {
+        Event e = Event.current;
+        Rect slotWeapon = new Rect(Screen.width / 1.25f, Screen.height / 1.5f, 64, 64);
+        GUI.Box(slotWeapon, "", skin2.GetStyle("Slot"));
+
+        if (itemWeapon.itemName != null)
+        {
+            GUI.DrawTexture(new Rect(Screen.width / 1.25f + 15f, Screen.height / 1.5f + 15f, 32, 32), itemWeapon.itemIcon); //TODO cuidado aquí con el size del icon
+            if (slotWeapon.Contains(e.mousePosition))
+            {
+                toolTip = CreateToolTip(itemWeapon);
+                if (e.button == 0 && e.type == EventType.MouseDrag && !draggingItem)
+                {
+                    draggingItem = true;
+                    draggedItem = itemWeapon;
+                    itemWeapon = new Item();
+                }
+                if (e.isMouse && e.type == EventType.MouseDown && e.button == 1 && !goCraft)
+                {
+                    //playerObject.GetComponent<NavMeshAgent>().SetPath(new NavMeshPath()); //BUG parar movimiento, no funciona
+                    AddItem(itemWeapon);
+                    itemWeapon = new Item();
+                }
+            }
+
+        }
+        else
+        {
+            if (slotWeapon.Contains(e.mousePosition))
+            {
+                if (e.type == EventType.MouseUp && draggingItem)
+                {
+                    itemWeapon = draggedItem;
+                    draggingItem = false;
+                    draggedItem = null;
+                }
+            }
+            if (!slotWeapon.Contains(e.mousePosition) && e.isMouse
+                && e.type == EventType.MouseUp && draggingItem && !goCraft)
+            {
+                AddItem(draggedItem);
+                draggingItem = false;
+                draggedItem = null;
+            }
+
+        }
     }
 
     void DrawInventory()
@@ -130,14 +181,17 @@ public class Inventory : MonoBehaviour {
                             playerObject.GetComponent<PlayerHealth>().TakeLife(inventory[i].itemPower);
                             inventory[i] = new Item();
                         }
-                        if (Input.GetKeyDown(KeyCode.E)) //Equipar Botella
+                        if (Input.GetKeyDown(KeyCode.E)) //Equipar Objeto
                         {
-                            isEquiped = true;
-                              ///////////////////////////////////////////////
-                              /////////////////////////////////////////
-                              ////////////////////////////////////
-                              //////////////////////////////////
-
+                            AddItem(itemWeapon);
+                            itemWeapon = inventory[i];
+                            inventory[i] = new Item();
+                        }
+                        if (e.isMouse && e.type == EventType.MouseDown && e.button == 1 && !goCraft)
+                        {
+                            //playerObject.GetComponent<NavMeshAgent>().SetPath(new NavMeshPath()); //BUG parar movimiento, no funciona
+                            AddItem(itemWeapon);
+                            itemWeapon = inventory[i];
                             inventory[i] = new Item();
                         }
                     }
@@ -177,6 +231,7 @@ public class Inventory : MonoBehaviour {
         }
     }
 
+    #region Inventory Methods
     string CreateToolTip(Item item)
     {
         toolTip = item.itemName + "\n\n<color=#fbd1ff>" + item.itemDescription + "</color>\n";
@@ -236,5 +291,16 @@ public class Inventory : MonoBehaviour {
         }
         return false;
     }
+    #endregion
+
+    #region Weapon Methods
+
+    void equipWeapon (){
+
+        // TODO equipar objeto
+
+    }
+
+    #endregion
 
 }
