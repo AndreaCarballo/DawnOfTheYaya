@@ -18,13 +18,14 @@ public class EnemyInteract : MonoBehaviour
 
     //Visible Variables
     public Texture2D cursorTextureHand;
+    public Texture2D cursorTexture;
     #endregion
 
 
     // Use this for initialization
     void Start()
     {
-        meshObject = GameObject.Find("male1591Mesh2"); 
+        meshObject = GameObject.Find("female_genericMesh"); 
         firstColor = meshObject.GetComponentInChildren<Renderer>().material.GetColor("_Color");
         gameObject.GetComponentInChildren<Renderer>().material.SetColor("_Color",Color.red);
         playerObject = GameObject.FindGameObjectWithTag("Player");
@@ -73,7 +74,7 @@ public class EnemyInteract : MonoBehaviour
     void OnMouseExit()
     {
         meshObject.GetComponentInChildren<SkinnedMeshRenderer>().material.color = firstColor;
-        Cursor.SetCursor(null, Vector2.zero, cursorMode);
+        Cursor.SetCursor(cursorTexture, Vector2.zero, cursorMode);
     }
     #endregion
 }
