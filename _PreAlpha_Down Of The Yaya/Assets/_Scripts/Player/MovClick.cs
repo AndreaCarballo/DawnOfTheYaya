@@ -21,7 +21,7 @@ public class MovClick : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject panelOptions;
     public GameObject panelControls;
-    public GameObject panelLanguage;
+
 
 
     //Visible Variables
@@ -86,7 +86,7 @@ public class MovClick : MonoBehaviour
 
     void OnGUI()
     {
-        if (!Input.GetKey(KeyCode.F1) && !sawIntroduction && !pauseMenuUI.activeSelf && !panelOptions.activeSelf && !panelControls.activeSelf && !panelLanguage.activeSelf)
+        if (!Input.GetKey(KeyCode.F1) && !sawIntroduction && !pauseMenuUI.activeSelf && !panelOptions.activeSelf && !panelControls.activeSelf )
         {
             myNavMeshAgent.speed = 0f;
             Rect backgroundRect = new Rect(Screen.width / 8, Screen.height / 1.25f, 925, 55);

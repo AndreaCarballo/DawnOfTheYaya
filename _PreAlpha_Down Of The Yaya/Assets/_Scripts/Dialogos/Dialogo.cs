@@ -33,13 +33,39 @@ public class Dialogo : MonoBehaviour {
      void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && objectTouched)
-        {
+        { 
             enOfDialog = false;
-            dialogoController.ProximoDialogo(dialogo[0]);
+            ////////////////////AQUI PONGO LOS DIALOGOS NPC EN INGLES///////////////////////
+            if(LanguageManager.idioma == 0)
+            {
+                dialogoController.ProximoDialogo(dialogo[0]);
+
+            }else if (LanguageManager.idioma == 1)
+            {
+                dialogoController.ProximoDialogo(dialogo[1]);
+
+            }
+            
             if (transform.gameObject.name == "Telefono")
             {
-                transform.GetComponent<AudioSource>().PlayOneShot(cogerClip,0.5f);
-                transform.GetComponent<AudioSource>().PlayOneShot(beepClip, 0.6f);
+               
+                if (LanguageManager.idioma == 0)
+                {
+                    dialogoController.ProximoDialogo(dialogo[0]);
+                    transform.GetComponent<AudioSource>().PlayOneShot(cogerClip, 0.5f);
+                    transform.GetComponent<AudioSource>().PlayOneShot(beepClip, 0.6f);
+
+
+                }
+                else if (LanguageManager.idioma == 1) {
+
+                    dialogoController.ProximoDialogo(dialogo[1]);
+                    transform.GetComponent<AudioSource>().PlayOneShot(cogerClip, 0.5f);
+                    transform.GetComponent<AudioSource>().PlayOneShot(beepClip, 0.6f);
+
+                }
+
+                
             }
         }
     }

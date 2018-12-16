@@ -14,4 +14,4 @@ MonoBehaviour:
   dialogo: (...) (...) (...)
   respuestas:
   - respuesta: Mmmmh..
-    proximoDialogo: {fileID: 11400000, guid: 0b0b7a235d421d1459419599c52c6f24, type: 2}
+    proximoDialogo: {fileID: 11400000, guid: 6fb115d835819da45b75099a2f81f2bc, type: 2}

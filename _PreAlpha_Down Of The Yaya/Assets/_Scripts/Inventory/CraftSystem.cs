@@ -99,10 +99,21 @@ public class CraftSystem : MonoBehaviour {
         Event ec = Event.current;
 
         Rect backgroundRect = new Rect(75, 375, 300, 275);
-        GUI.Box(backgroundRect, "CRAFT SYSTEM" + "\n\n\n\n\n\n\n" + "<color=#fb8cff>"+
-            " Para craftear ingredientes arrástralos\n desde tu inventario y pulsa 'Enter'"+ "</color>"
-            + "\n\n<color=#fb8cff>" + " Puedes acelerar el proceso haciendo\n click derecho sobre los ingredientes\n" + "</color>" 
-            + "\n\n<color=#fb8cff>" + " Para salir del sistema de crafteo\n pulsa 'Q'" + "</color>");
+        if (LanguageManager.idioma == 0)
+        {
+            GUI.Box(backgroundRect, "CRAFT SYSTEM" + "\n\n\n\n\n\n\n" + "<color=#fb8cff>" +
+                " Para craftear ingredientes arrástralos\n desde tu inventario y pulsa 'Enter'" + "</color>"
+                + "\n\n<color=#fb8cff>" + " Puedes acelerar el proceso haciendo\n click derecho sobre los ingredientes\n" + "</color>"
+                + "\n\n<color=#fb8cff>" + " Para salir del sistema de crafteo\n pulsa 'Q'" + "</color>");
+        }
+        else if (LanguageManager.idioma == 1) {
+
+
+            GUI.Box(backgroundRect, "CRAFT SYSTEM" + "\n\n\n\n\n\n\n" + "<color=#fb8cff>" +
+            "To build ingredients, drag them \n from your inventory and hit 'Enter'" + " </color>"
+            + "\n\n<color=#fb8cff>" + " You can speed up the process by clicking \n right click on the ingredients \n" + " </color>"
+            + "\n\n<color=#fb8cff>" + "To exit the crafting system \n press 'Q'" + " </color>");
+        }
 
         for (int i = 0; i < numberOfSlots; i++)
         {

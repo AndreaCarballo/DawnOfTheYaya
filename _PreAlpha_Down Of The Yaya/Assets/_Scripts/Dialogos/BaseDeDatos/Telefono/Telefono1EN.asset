@@ -9,7 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf0e31de5d5631a41b7cd55a1bc29085, type: 3}
-  m_Name: Telefono2
+  m_Name: Telefono1EN
   m_EditorClassIdentifier: 
-  dialogo: "\xA1Ser\xE1 posible que no me coja el tel\xE9fono a estas horas!"
-  respuestas: []
+  dialogo: (...) (...) (...)
+  respuestas:
+  - respuesta: Mmmmh..
+    proximoDialogo: {fileID: 11400000, guid: 0b0b7a235d421d1459419599c52c6f24, type: 2}
