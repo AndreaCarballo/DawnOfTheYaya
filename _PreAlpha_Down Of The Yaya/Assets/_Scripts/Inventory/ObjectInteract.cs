@@ -71,7 +71,7 @@ public class ObjectInteract : MonoBehaviour
                     break;
                 case "Taxi":
                     //End of PreAlpha
-                    Destroy(playerObject);
+                    playerObject.SetActive(false);
                     //ambientSound.SetActive(false);
                     //taxiEndMusic.SetActive(true);
                     //endPreAlphaMenu.SetActive(true);
@@ -79,6 +79,11 @@ public class ObjectInteract : MonoBehaviour
                     break;
                 case "Bottle":
                     inventory.AddItemByID(4);
+                    playSound = true;
+                    anim.SetTrigger("PickObject");
+                    break;
+                case "Sneaker":
+                    inventory.AddItemByID(5);
                     playSound = true;
                     anim.SetTrigger("PickObject");
                     break;

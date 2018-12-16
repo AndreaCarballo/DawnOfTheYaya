@@ -9,11 +9,11 @@ public class ItemDatabase : MonoBehaviour
 
     private void Start()
     {
-        myItemList.Add(new Item("apple", "Una manzana en buen estado." +"\n" + "Puede juntarse con otros ingredientes\n para crear mejores alimentos" +
+        myItemList.Add(new Item("apple", "Una manzana en buen estado." + "\n" + "Puede juntarse con otros ingredientes\n para crear mejores alimentos" +
             "\n\n" + "\n\n<color=#fb8cff>" + " Para comer, presiona la tecla 'U' \n mientras tienes el cursor encima del objeto" + "</color>",
             0, 3, Item.ItemType.Food));
 
-        myItemList.Add(new Item("broccoli", "Una hortaliza en buen estado." +"\n" + "Puede juntarse con otros ingredientes\n para crear mejores alimentos" +
+        myItemList.Add(new Item("broccoli", "Una hortaliza en buen estado." + "\n" + "Puede juntarse con otros ingredientes\n para crear mejores alimentos" +
             "\n\n" + "\n\n<color=#fb8cff>" + " Para comer, presiona la tecla 'U' \n mientras tienes el cursor encima del objeto" + "</color>",
             1, 3, Item.ItemType.Food));
 
@@ -25,8 +25,13 @@ public class ItemDatabase : MonoBehaviour
             "\n\n" + "\n\n<color=#fb8cff>" + " Para comer, presiona la tecla 'U' \n mientras tienes el cursor encima del objeto" + "</color>",
             3, 10, Item.ItemType.Food));
         myItemList.Add(new Item("bottle", "Botella para utilizar de señuelo." + "\n" +
-          "\n\n" + "\n\n<color=#fb8cff>" + " Para equipar, presiona la tecla 'E' \n mientras tienes el cursor encima del objeto" + "</color>",
-          4, 0, Item.ItemType.Food));
+            "\n\n" + "\n\n<color=#fb8cff>" + " Para equipar, presiona la tecla 'E' \n mientras tienes el cursor encima del objeto" + "</color>",
+            4, 0, Item.ItemType.Food));
+        myItemList.Add(new Item("sneaker", "Zapatilla para usar como arma." + "\n" +
+            "\n\n" + "\n\n<color=#fb8cff>" + " Para equipar, presiona la tecla 'E' \n mientras tienes el cursor encima del objeto" + "</color>",
+            5, 10, Item.ItemType.Food));
+
+
     }
 
 }

@@ -32,6 +32,7 @@ public class Inventory : MonoBehaviour
     public GUISkin skin;
     public GUISkin skin2;
     public GameObject bottleGameObject;
+    public GameObject sneakerGameObject;
 
     #endregion
 
@@ -315,14 +316,28 @@ public class Inventory : MonoBehaviour
     public void equipWeapon()
     {
         if (itemWeapon.itemName == "bottle" && itemWeapon != null)
+        {
             bottleGameObject.SetActive(true);
-        canThrow = true;
+            canThrow = true;
+        }
+        if (itemWeapon.itemName == "sneaker" && itemWeapon != null)
+        {
+            sneakerGameObject.SetActive(true);
+        }
+
     }
 
     public void quitWeapon()
     {
         if (itemWeapon.itemName == "bottle")
             bottleGameObject.SetActive(false);
+
+        if (itemWeapon.itemName == "sneaker")
+        {
+            sneakerGameObject.SetActive(false);
+        }
+
+
         canThrow = false;
     }
 

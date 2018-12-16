@@ -77,14 +77,14 @@ public class CamaraSeguimientoIN : MonoBehaviour
 
         //}
 
-        if (Input.GetKeyDown(KeyCode.Z) && mov1Z)
+        if (Input.GetKeyDown(KeyCode.A) && mov1Z)
         {
             offset = new Vector3(-offset.x, offset.y, offset.z);
             mov1Z = false;
             mov2Z = true;
             mov1X = false;
             mov2X = true;
-        } else if (Input.GetKeyDown(KeyCode.X) && mov1X)
+        } else if (Input.GetKeyDown(KeyCode.D) && mov1X)
         {
             offset = new Vector3(offset.x, offset.y, -offset.z);
             mov1Z = false;
@@ -92,14 +92,14 @@ public class CamaraSeguimientoIN : MonoBehaviour
             mov1X = false;
             mov2X = true;
 
-        } else if (Input.GetKeyDown(KeyCode.Z) && mov2Z)
+        } else if (Input.GetKeyDown(KeyCode.A) && mov2Z)
         {
             offset = new Vector3(offset.x, offset.y, -offset.z);
             mov1Z = true;
             mov2Z = false;
             mov1X = true;
             mov2X = false;
-        } else if (Input.GetKeyDown(KeyCode.X) && mov2X)
+        } else if (Input.GetKeyDown(KeyCode.D) && mov2X)
         {
             offset = new Vector3(-offset.x, offset.y, offset.z);
             mov1Z = true;
