@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Inventory : MonoBehaviour {
+public class Inventory : MonoBehaviour
+{
 
     #region Variables
     //Variables
@@ -18,7 +19,10 @@ public class Inventory : MonoBehaviour {
     private bool goCraft;
     private GameObject playerObject;
     private Animator anim;
-  
+    private bool canThrow;
+    private GameObject bottleSoundSource;
+
+
 
     //Visible Variables
     public List<Item> inventory = new List<Item>();
@@ -27,6 +31,7 @@ public class Inventory : MonoBehaviour {
     public int slotsX, slotsY;
     public GUISkin skin;
     public GUISkin skin2;
+    public GameObject bottleGameObject;
 
     #endregion
 
@@ -36,18 +41,14 @@ public class Inventory : MonoBehaviour {
         craftStation = GameObject.Find("CraftStation");
         playerObject = GameObject.FindGameObjectWithTag("Player");
         anim = playerObject.GetComponent<Animator>();
+        canThrow = false;
+        bottleSoundSource = GameObject.Find("CrashBottle");
 
-        for (int i=0; i < (slotsX * slotsY); i++)
+        for (int i = 0; i < (slotsX * slotsY); i++)
         {
             slots.Add(new Item());
             inventory.Add(new Item());
         }
-
-        if (itemWeapon != null)
-        {
-            equipWeapon();
-        }
-
     }
 
     private void Update()
@@ -60,7 +61,20 @@ public class Inventory : MonoBehaviour {
             showToolTip = false;
             showInventory = !showInventory;
         }
-        
+
+        if(itemWeapon != null || itemWeapon.itemName != "")
+        {
+            equipWeapon();
+        }
+
+        if(canThrow)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                ThrowItem();
+            }
+        }
+
     }
 
     void OnGUI()
@@ -76,7 +90,7 @@ public class Inventory : MonoBehaviour {
             if (showToolTip)
                 GUI.Box(new Rect(Event.current.mousePosition.x + 15f, Event.current.mousePosition.y, 300, 200), toolTip);
         }
-            
+
         if (draggingItem)
         {
             GUI.DrawTexture(new Rect(Event.current.mousePosition.x, Event.current.mousePosition.y, 50, 50), draggedItem.itemIcon);
@@ -100,12 +114,14 @@ public class Inventory : MonoBehaviour {
                 {
                     draggingItem = true;
                     draggedItem = itemWeapon;
+                    quitWeapon();
                     itemWeapon = new Item();
                 }
                 if (e.isMouse && e.type == EventType.MouseDown && e.button == 1 && !goCraft)
                 {
                     //playerObject.GetComponent<NavMeshAgent>().SetPath(new NavMeshPath()); //BUG parar movimiento, no funciona
                     AddItem(itemWeapon);
+                    quitWeapon();
                     itemWeapon = new Item();
                 }
             }
@@ -138,7 +154,7 @@ public class Inventory : MonoBehaviour {
         Event e = Event.current;
         int i = 0;
 
-        Rect backgroundRect = new Rect(75, 75, slotsX * slotsY * (slotsX+1) + 65, slotsX * slotsY * (slotsY + 1) + 75);
+        Rect backgroundRect = new Rect(75, 75, slotsX * slotsY * (slotsX + 1) + 65, slotsX * slotsY * (slotsY + 1) + 75);
         GUI.Box(backgroundRect, "INVENTORY");
 
         for (int y = 0; y < slotsY; y++)
@@ -151,12 +167,12 @@ public class Inventory : MonoBehaviour {
 
                 if (slots[i].itemName != null)
                 {
-                    GUI.DrawTexture(slotRect,slots[i].itemIcon);
+                    GUI.DrawTexture(slotRect, slots[i].itemIcon);
                     if (slotRect.Contains(e.mousePosition))
                     {
                         toolTip = CreateToolTip(slots[i]);
                         showToolTip = true;
-                        if(e.button == 0 && e.type == EventType.MouseDrag && !draggingItem)
+                        if (e.button == 0 && e.type == EventType.MouseDrag && !draggingItem)
                         {
                             draggingItem = true;
                             prevIndex = i;
@@ -196,7 +212,8 @@ public class Inventory : MonoBehaviour {
                         }
                     }
 
-                } else
+                }
+                else
                 {
                     if (slotRect.Contains(e.mousePosition))
                     {
@@ -215,13 +232,13 @@ public class Inventory : MonoBehaviour {
                         draggedItem = null;
                     }
 
-                    if (!backgroundRect.Contains(e.mousePosition) && e.isMouse 
+                    if (!backgroundRect.Contains(e.mousePosition) && e.isMouse
                         && e.type == EventType.MouseUp && draggingItem)
                     {
                         draggingItem = false;
                         draggedItem = null;
                     }
-                    
+
                 }
 
                 if (toolTip == "")
@@ -238,15 +255,15 @@ public class Inventory : MonoBehaviour {
         return toolTip;
     }
 
-    public void  AddItemByID(int id)
+    public void AddItemByID(int id)
     {
-        for (int i=0;i<inventory.Count;i++)
+        for (int i = 0; i < inventory.Count; i++)
         {
-            if(inventory[i].itemName == null)
+            if (inventory[i].itemName == null)
             {
-                for (int j=0;j<itemDatabase.myItemList.Count;j++)
+                for (int j = 0; j < itemDatabase.myItemList.Count; j++)
                 {
-                    if(itemDatabase.myItemList[j].itemID == id)
+                    if (itemDatabase.myItemList[j].itemID == id)
                     {
                         inventory[i] = itemDatabase.myItemList[j];
                     }
@@ -270,7 +287,7 @@ public class Inventory : MonoBehaviour {
 
     public void RemoveItemByID(int id)
     {
-        for (int i=0; i < inventory.Count; i++)
+        for (int i = 0; i < inventory.Count; i++)
         {
             if (inventory[i].itemID == id)
             {
@@ -285,7 +302,7 @@ public class Inventory : MonoBehaviour {
         foreach (Item item in inventory)
         {
             if (item.itemID == id)
-            { 
+            {
                 return true;
             }
         }
@@ -295,12 +312,49 @@ public class Inventory : MonoBehaviour {
 
     #region Weapon Methods
 
-    void equipWeapon (){
-
-        // TODO equipar objeto
-
+    public void equipWeapon()
+    {
+        if (itemWeapon.itemName == "bottle" && itemWeapon != null)
+            bottleGameObject.SetActive(true);
+        canThrow = true;
     }
 
+    public void quitWeapon()
+    {
+        if (itemWeapon.itemName == "bottle")
+            bottleGameObject.SetActive(false);
+        canThrow = false;
+    }
+
+    public void ThrowItem()
+    {
+        if (itemWeapon.itemName == "bottle")
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                Vector3 setTarget = hit.point;
+                Vector3 direction = setTarget - bottleGameObject.transform.position;
+
+                GameObject copyBottle = Instantiate(bottleGameObject);
+                copyBottle.transform.position = bottleGameObject.transform.position;
+                bottleGameObject.SetActive(false);
+
+                copyBottle.transform.parent = null;
+                copyBottle.GetComponent<Rigidbody>().useGravity = true;
+                copyBottle.GetComponent<Rigidbody>().AddForce(direction * 85);
+                copyBottle.GetComponent<Rigidbody>().AddForce(transform.up * 250);
+                itemWeapon = new Item();
+
+                bottleSoundSource.transform.position = setTarget;
+                bottleSoundSource.GetComponent<AudioSource>().PlayDelayed(1);
+
+            }
+        }
+
+        canThrow = false;
+    }
     #endregion
 
 }
