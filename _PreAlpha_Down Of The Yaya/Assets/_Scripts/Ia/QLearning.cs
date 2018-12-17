@@ -31,9 +31,11 @@ public class QLearning
 
     private bool firstIteration;
     System.Random random = new System.Random();
+    private Game control;
 
     public QLearning(int possActs, string _path, bool _hearing)
     {
+        control = GameObject.Find("Canvas").GetComponent<Game>();
         QStates = new List<float[]>();
         QActions = new List<float[]>();
         numberPossibleActions = possActs;
@@ -47,10 +49,22 @@ public class QLearning
         {
             pathL = "Matrix/matrix.json";
         }
-        path = _path;
+        changePath(_path);
         LoadMatrix();
         firstIteration = true;
         hearing = _hearing;
+    }
+
+    public void changePath(string _path)
+    {
+        if (control.difficulty == 0)
+        {
+            path = _path;
+        }
+        else
+        {
+            path = pathL;
+        }
     }
 
     /*

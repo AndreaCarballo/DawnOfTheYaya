@@ -76,9 +76,9 @@ public class ZombieAgent : MonoBehaviour
     void Start()
     {
         diff = GameObject.Find("Canvas").GetComponent<Game>();
-        applyDifficultySettings();
         QL = new QLearning(3, path, false);
         QLHearing = new QLearning(2, pathHearing, true);
+        applyDifficultySettings();
         rb = GetComponent<Rigidbody>();
         FOVMesh = new Mesh();
         FOVMesh.name = "FOV Mesh";
@@ -105,6 +105,9 @@ public class ZombieAgent : MonoBehaviour
                 wrongSound = -11f; //the user will be able to use each object 3 times
                 break;
         }
+
+        QL.changePath(path);
+        QLHearing.changePath(pathHearing);
     }
 
     void FixedUpdate()
@@ -140,7 +143,7 @@ public class ZombieAgent : MonoBehaviour
                 if (hearingDistance < hearingRadius && audioTarget.isPlaying)
                 {
                     heard = true;
-                    switch (hearingObjects[0].name)
+                    switch (hearingObjects[j].name)
                     {
                         case "Player":
                             soundType = 1f;
@@ -229,7 +232,6 @@ public class ZombieAgent : MonoBehaviour
                 lastSoundType = 0;
                 heard = false;
                 rewardHearing += rightSound;
-                Debug.Log(rewardHearing);
                 float[] qStateHear = new float[4];
                 qStateHear[0] = 0f;
                 qStateHear[1] = 0f;

@@ -112,32 +112,25 @@ public class Game : MonoBehaviour
     {
 
         difficulty = 0;
-        manDif.objectsSet();
-        foreach (GameObject zombie in GameObject.FindGameObjectsWithTag("Enemy"))
-        {
-            ZombieAgent agent = zombie.GetComponent<ZombieAgent>();
-            agent.applyDifficultySettings();
-
-        }
+        diffChanges();
     }
 
     public void setDifficultyToNormal()
     {
 
         difficulty = 1;
-        manDif.objectsSet();
-        foreach (GameObject zombie in GameObject.FindGameObjectsWithTag("Enemy"))
-        {
-            ZombieAgent agent = zombie.GetComponent<ZombieAgent>();
-            agent.applyDifficultySettings();
-
-        }
+        diffChanges();
     }
 
     public void setDifficultyToHard()
     {
 
         difficulty = 2;
+        diffChanges();
+    }
+
+    public void diffChanges()
+    {
         manDif.objectsSet();
         foreach (GameObject zombie in GameObject.FindGameObjectsWithTag("Enemy"))
         {
