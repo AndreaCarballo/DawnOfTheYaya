@@ -14,6 +14,7 @@ public class ManageDifficulty : MonoBehaviour
     private List<float[]> timeThresholds = new List<float[]>();
 
     private List<Prefabs>[][] objects;
+    private int got0, got1, got2 = 0; //number of objects the player already got in each zone
 
     private PlayerHealth health;
     private Game control;
@@ -61,20 +62,34 @@ public class ManageDifficulty : MonoBehaviour
             case 1:
                 if (time > timeThresholds[zone][control.difficulty - 1])
                 {
+                    got0 = 0;
+                    got1 = 0;
+                    got2 = 0;
                     control.setDifficultyToEasy();
+
                 }
                 else if (health.lifeLost > lifeThresholds[zone][control.difficulty - 1])
                 {
+                    got0 = 0;
+                    got1 = 0;
+                    got2 = 0;
                     control.setDifficultyToEasy();
+
                 }
                 break;
             case 2:
                 if (time > timeThresholds[zone][control.difficulty - 1])
                 {
+                    got0 = 0;
+                    got1 = 0;
+                    got2 = 0;
                     control.setDifficultyToNormal();
                 }
                 else if (health.lifeLost > lifeThresholds[zone][control.difficulty - 1])
                 {
+                    got0 = 0;
+                    got1 = 0;
+                    got2 = 0;
                     control.setDifficultyToNormal();
                 }
                 break;
@@ -150,7 +165,6 @@ public class ManageDifficulty : MonoBehaviour
 
     public void objectsSet()
     {
-        int got0 = 0; //number of objects the player already got
         foreach (GameObject aux in currentObjects0)
         {
             if (aux != null)
@@ -167,7 +181,7 @@ public class ManageDifficulty : MonoBehaviour
         currentObjects0 = new List<GameObject>();
         foreach (Prefabs ob in objects[control.difficulty][0])
         {
-            if (need0 == 0)
+            if (need0 <= 0)
                 break;
             GameObject a = Instantiate(ob.ob, ob.pos, Quaternion.identity, trans);
             ObjectInteract obin = a.GetComponent<ObjectInteract>();
@@ -178,7 +192,6 @@ public class ManageDifficulty : MonoBehaviour
 
         }
 
-        int got1 = 0; //number of objects the player already got
         foreach (GameObject aux in currentObjects1)
         {
             if (aux != null)
@@ -195,7 +208,7 @@ public class ManageDifficulty : MonoBehaviour
         currentObjects1 = new List<GameObject>();
         foreach (Prefabs ob in objects[control.difficulty][1])
         {
-            if (need1 == 0)
+            if (need1 <= 0)
                 break;
             GameObject a = Instantiate(ob.ob, ob.pos, Quaternion.identity, trans);
             ObjectInteract obin = a.GetComponent<ObjectInteract>();
@@ -206,7 +219,6 @@ public class ManageDifficulty : MonoBehaviour
 
         }
 
-        int got2 = 0; //number of objects the player already got
         foreach (GameObject aux in currentObjects2)
         {
             if (aux != null)
@@ -223,7 +235,7 @@ public class ManageDifficulty : MonoBehaviour
         currentObjects2 = new List<GameObject>();
         foreach (Prefabs ob in objects[control.difficulty][2])
         {
-            if (need2 == 0)
+            if (need2 <= 0)
                 break;
             GameObject a = Instantiate(ob.ob, ob.pos, Quaternion.identity, trans);
             ObjectInteract obin = a.GetComponent<ObjectInteract>();

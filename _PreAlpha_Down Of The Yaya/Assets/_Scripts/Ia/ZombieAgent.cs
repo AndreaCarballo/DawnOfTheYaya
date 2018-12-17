@@ -205,7 +205,14 @@ public class ZombieAgent : MonoBehaviour
 
     void LateUpdate()
     {
-        DrawFieldOfView();
+        if (diff.difficulty != 2)
+        {
+            DrawFieldOfView();
+        } else
+        {
+            FOVMesh.Clear();
+        }
+        
     }
 
 
