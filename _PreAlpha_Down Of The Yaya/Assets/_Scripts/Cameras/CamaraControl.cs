@@ -21,7 +21,7 @@ public class CamaraControl : MonoBehaviour
     private bool activateTransitionCamera;
     private bool activateTransitionCamera2;
     private bool activateTransitionCamera3;
-    private bool CinematicDone;
+    public bool CinematicDone;
     private bool CinematicDoing;
     private GameObject taxi;
     private Animator anim;

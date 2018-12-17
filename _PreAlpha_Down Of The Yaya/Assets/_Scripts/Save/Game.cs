@@ -22,6 +22,11 @@ public class Game : MonoBehaviour
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         manDif.buildObjectList();
         manDif.objectsSet();
+        if (MainMenu.load)
+        {
+            Load();
+            MainMenu.load = false;
+        }
     }
 
     public void Save()
@@ -30,6 +35,10 @@ public class Game : MonoBehaviour
         BinaryFormatter binary = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/SaveGame.dat"); //the creates a file in the unity app data path
         SavedData game = new SavedData();
+        Tutorial tuto = player.GetComponent<Tutorial>();
+        CamaraControl cam = player.GetComponent<CamaraControl>();
+        game.tutorial = tuto.EndTuto;
+        game.cinematic = cam.CinematicDone;
         game.difficulty = difficulty;
         game.zone = manDif.zone;
         game.time = manDif.time;
@@ -77,6 +86,10 @@ public class Game : MonoBehaviour
             FileStream file = File.Open(Application.persistentDataPath + "/SaveGame.dat", FileMode.Open);
             SavedData game = (SavedData)binary.Deserialize(file);
             file.Close();
+            Tutorial tuto = player.GetComponent<Tutorial>();
+            CamaraControl cam = player.GetComponent<CamaraControl>();
+            tuto.EndTuto = game.tutorial;
+            cam.CinematicDone = game.cinematic;
             difficulty = game.difficulty;
             manDif.zone = game.zone;
             manDif.time = game.time;

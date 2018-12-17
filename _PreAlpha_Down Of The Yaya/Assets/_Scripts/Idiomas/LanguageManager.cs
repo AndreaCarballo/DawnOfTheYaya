@@ -11,6 +11,7 @@ public class LanguageManager : MonoBehaviour {
     public Text topciones1;
     public Text tplay;
     public Text tquit;
+    public Text tload;
     public Text tlenguajes;
     public Text tlenguajes1;
     public Text tvolumen;
@@ -61,6 +62,7 @@ public class LanguageManager : MonoBehaviour {
 
        
         tplay.text = "JUGAR";
+        tload.text = "CARGAR";
         tlenguajes.text= "IDIOMAS";
         tlenguajes1.text = "IDIOMAS";
         topciones.text = "OPCIONES";
@@ -91,6 +93,7 @@ public class LanguageManager : MonoBehaviour {
 
        
         tplay.text = "PLAY";
+        tload.text = "LOAD";
         tlenguajes.text = "LANGUAGES";
         tlenguajes1.text = "LANGUAGES";
         topciones.text = "OPTIONS";

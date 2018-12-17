@@ -24,7 +24,8 @@ public class ManageDifficulty : MonoBehaviour
     public GameObject apples;
     public GameObject bananas;
     public GameObject brocolis;
-    public GameObject sneakers;
+    public GameObject canes;
+    public GameObject rocks;
     public Transform trans;
     private List<GameObject> currentObjects0 = new List<GameObject>();
     private List<GameObject> currentObjects1 = new List<GameObject>();
@@ -267,29 +268,29 @@ public class ManageDifficulty : MonoBehaviour
         hard0.Add(new Prefabs(bananas, new Vector3(1f, 0.7f, 1f)));
 
         List<Prefabs> easy1 = new List<Prefabs>();
-        easy1.Add(new Prefabs(sneakers, new Vector3(45f, 0.2f, 0f)));
+        easy1.Add(new Prefabs(canes, new Vector3(45f, 0.2f, 0f)));
         easy1.Add(new Prefabs(apples, new Vector3(455f, 0.2f, 15f)));
         easy1.Add(new Prefabs(bottles, new Vector3(30f, 0.5f, -25f)));
         easy1.Add(new Prefabs(brocolis, new Vector3(50f, 0.2f, -30f)));
 
         List<Prefabs> normal1 = new List<Prefabs>();
-        normal1.Add(new Prefabs(sneakers, new Vector3(45f, 0.2f, 0f)));
+        normal1.Add(new Prefabs(canes, new Vector3(45f, 0.2f, 0f)));
         normal1.Add(new Prefabs(apples, new Vector3(55f, 0.2f, 15f)));
         normal1.Add(new Prefabs(brocolis, new Vector3(50f, 0.2f, -30f)));
 
         List<Prefabs> hard1 = new List<Prefabs>();
-        hard1.Add(new Prefabs(sneakers, new Vector3(45f, 0.2f, 0f)));
+        hard1.Add(new Prefabs(canes, new Vector3(45f, 0.2f, 0f)));
         hard1.Add(new Prefabs(brocolis, new Vector3(50f, 0.2f, -30f)));
 
         List<Prefabs> easy2 = new List<Prefabs>();
         easy2.Add(new Prefabs(apples, new Vector3(20f, 0.2f, -57f)));
         easy2.Add(new Prefabs(bottles, new Vector3(10f, 0.2f, -57f)));
-        easy2.Add(new Prefabs(bottles, new Vector3(-30f, 0.2f, -56f)));
+        easy2.Add(new Prefabs(rocks, new Vector3(-30f, 0.2f, -56f)));
         easy2.Add(new Prefabs(bananas, new Vector3(-20f, 0.2f, -57f)));
 
         List<Prefabs> normal2 = new List<Prefabs>();
         normal2.Add(new Prefabs(apples, new Vector3(20f, 0.2f, -57f)));
-        normal2.Add(new Prefabs(bottles, new Vector3(10f, 0.2f, -57f)));
+        normal2.Add(new Prefabs(rocks, new Vector3(10f, 0.2f, -57f)));
         normal2.Add(new Prefabs(bananas, new Vector3(-20f, 0.2f, -57f)));
 
         List<Prefabs> hard2 = new List<Prefabs>();

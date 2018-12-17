@@ -11,6 +11,8 @@ public class SavedData
     public float time;
     public int lifeLost;
     public int language;
+    public bool tutorial;
+    public bool cinematic;
     public List<SavedZombie> zombies;
     public SavePlayer player;
 

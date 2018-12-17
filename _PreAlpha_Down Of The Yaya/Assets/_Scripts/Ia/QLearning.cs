@@ -154,6 +154,10 @@ public class QLearning
             }
             SaveMatrix();
         }
+        else
+        {
+            LoadMatrix();
+        }
 
     }
 
@@ -230,7 +234,6 @@ public class QLearning
         {
             pathLoad = Path.Combine(Application.persistentDataPath, path);
         }
-
         if (File.Exists(pathLoad))
         {
             Matrix data;

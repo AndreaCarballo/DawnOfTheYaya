@@ -77,14 +77,6 @@ public class ObjectInteract : MonoBehaviour
                     //endPreAlphaMenu.SetActive(true);
                     //lifeHUD.SetActive(false);
                     break;
-                case "FINAL":
-                    //End Level 1
-                    //playerObject.SetActive(false);
-                    // ambientSound.SetActive(false);
-                    // taxiEndMusic.SetActive(true);
-                    endPreAlphaMenu.SetActive(true);
-                    //lifeHUD.SetActive(false);
-                    break;
                 case "Bottle":
                     inventory.AddItemByID(4);
                     playSound = true;
@@ -95,14 +87,24 @@ public class ObjectInteract : MonoBehaviour
                     playSound = true;
                     anim.SetTrigger("PickObject");
                     break;
+                case "Rock":
+                    inventory.AddItemByID(6);
+                    playSound = true;
+                    anim.SetTrigger("PickObject");
+                    break;
+                case "Cane":
+                    inventory.AddItemByID(7);
+                    playSound = true;
+                    anim.SetTrigger("PickObject");
+                    break;
             }
 
             activeInteract = false;
             Cursor.SetCursor(cursorTexture, Vector2.zero, cursorMode);
-            if(playSound)
+            if (playSound)
                 PlaySound();
             if (gameObject.name != "Taxi")
-                Destroy(gameObject); 
+                Destroy(gameObject);
         }
     }
 
@@ -110,7 +112,7 @@ public class ObjectInteract : MonoBehaviour
 
     void PlaySound()
     {
-        playerObject.GetComponent<AudioSource>().PlayOneShot(pickClip,0.6f);
+        playerObject.GetComponent<AudioSource>().PlayOneShot(pickClip, 0.6f);
         playSound = false;
     }
 
@@ -122,7 +124,7 @@ public class ObjectInteract : MonoBehaviour
             Mathf.PingPong(Time.time, 1));
 
         //Change the cursor
-        Cursor.SetCursor(cursorTextureHand,new Vector2 (hotSpot.x+10f,hotSpot.y-1f), cursorMode);
+        Cursor.SetCursor(cursorTextureHand, new Vector2(hotSpot.x + 10f, hotSpot.y - 1f), cursorMode);
 
         //Player movement if we press "left button mouse"
         if (Input.GetMouseButtonDown(0))
@@ -138,7 +140,7 @@ public class ObjectInteract : MonoBehaviour
         {
             playerObject.GetComponent<NavMeshAgent>().speed = prevSpeed;
             playerObject.GetComponent<NavMeshAgent>().SetPath(new NavMeshPath());
-        }     
+        }
     }
 
     void OnMouseExit()

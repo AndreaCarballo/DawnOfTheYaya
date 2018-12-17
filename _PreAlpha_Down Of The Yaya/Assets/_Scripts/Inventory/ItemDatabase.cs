@@ -35,16 +35,23 @@ public class ItemDatabase : MonoBehaviour
             myItemList.Add(new Item("sneaker", "Zapatilla para usar como arma." + "\n" +
                 "\n\n" + "\n\n<color=#fb8cff>" + " Para equipar, presiona la tecla 'E' \n mientras tienes el cursor encima del objeto" + "</color>",
                 5, 10, Item.ItemType.Weapon));
+            myItemList.Add(new Item("rock", "Piedra para utilizar como señuelo." + "\n" +
+                "\n\n" + "\n\n<color=#fb8cff>" + " Para equipar, presiona la tecla 'E' \n mientras tienes el cursor encima del objeto" + "</color>",
+                6, 0, Item.ItemType.Quest));
+            myItemList.Add(new Item("cane", "Bastón para usar como arma." + "\n" +
+                "\n\n" + "\n\n<color=#fb8cff>" + " Para equipar, presiona la tecla 'E' \n mientras tienes el cursor encima del objeto" + "</color>",
+                7, 20, Item.ItemType.Weapon));
 
 
 
 
         }
-        else if (LanguageManager.idioma == 1) {
+        else if (LanguageManager.idioma == 1)
+        {
 
 
             myItemList.Add(new Item("apple", "An apple in good condition." + "\n" + " Can be combined with other ingredients \n to create better foods" +
-                   "\n\n" + "\n\n<color=#fb8cff>" + " To eat, press the 'U' \n while holding the cursor on the object "+ "</color>",
+                   "\n\n" + "\n\n<color=#fb8cff>" + " To eat, press the 'U' \n while holding the cursor on the object " + "</color>",
                    0, 3, Item.ItemType.Food));
 
             myItemList.Add(new Item("broccoli", "A vegetable in good condition." + "\n" + "Can be combined with other ingredients \n to create better foods" +
@@ -60,11 +67,16 @@ public class ItemDatabase : MonoBehaviour
                 3, 10, Item.ItemType.Food));
             myItemList.Add(new Item("bottle", "Bottle to use as a decoy." + "\n" +
                 "\n\n" + "\n\n<color=#fb8cff>" + " To equip, press the 'E' \n while holding the cursor on the object" + "</color>",
-                4, 0, Item.ItemType.Food));
+                4, 0, Item.ItemType.Quest));
             myItemList.Add(new Item("sneaker", "Shoe to use as a weapon." + "\n" +
                 "\n\n" + "\n\n<color=#fb8cff>" + " To equip, press the 'E' \n while holding the cursor on the object" + "</color>",
-                5, 10, Item.ItemType.Food));
-
+                5, 10, Item.ItemType.Weapon));
+            myItemList.Add(new Item("rock", "Rock to use as a decoy." + "\n" +
+                "\n\n" + "\n\n<color=#fb8cff>" + " To equip, press the 'E' \n while holding the cursor on the object" + "</color>",
+                6, 0, Item.ItemType.Quest));
+            myItemList.Add(new Item("cane", "Cane to use as a weapon." + "\n" +
+                "\n\n" + "\n\n<color=#fb8cff>" + " To equip, press the 'E' \n while holding the cursor on the object" + "</color>",
+                7, 20, Item.ItemType.Weapon));
 
 
 

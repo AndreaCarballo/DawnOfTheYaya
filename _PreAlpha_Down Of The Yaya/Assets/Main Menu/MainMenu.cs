@@ -8,9 +8,11 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour {
 
     private float musicVolume = 0.15f;
+    public static bool load = false;
 
     public void PlayGame()
     {
+        load = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 
@@ -18,6 +20,14 @@ public class MainMenu : MonoBehaviour {
     {
         Debug.Log("QUIT GAME !");
         Application.Quit();
+
+    }
+
+    public void LoadGame()
+    {
+        load = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
 
     }
 

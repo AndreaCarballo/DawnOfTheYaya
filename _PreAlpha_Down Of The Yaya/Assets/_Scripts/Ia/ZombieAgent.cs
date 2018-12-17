@@ -151,7 +151,7 @@ public class ZombieAgent : MonoBehaviour
                         case "CrashBottle":
                             soundType = 2f;
                             break;
-                        case "Rock":
+                        case "CrashRock":
                             soundType = 3f;
                             break;
                     }
@@ -208,11 +208,12 @@ public class ZombieAgent : MonoBehaviour
         if (diff.difficulty != 2)
         {
             DrawFieldOfView();
-        } else
+        }
+        else
         {
             FOVMesh.Clear();
         }
-        
+
     }
 
 

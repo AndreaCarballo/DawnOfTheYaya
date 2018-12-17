@@ -21,6 +21,7 @@ public class Inventory : MonoBehaviour
     private Animator anim;
     private bool canThrow;
     private GameObject bottleSoundSource;
+    private GameObject rockSoundSource;
     private int initialAtackDamage;
 
 
@@ -34,6 +35,8 @@ public class Inventory : MonoBehaviour
     public GUISkin skin2;
     public GameObject bottleGameObject;
     public GameObject sneakerGameObject;
+    public GameObject rockGameObject;
+    public GameObject caneGameObject;
     public GameObject eatAudioSource;
 
     #endregion
@@ -47,6 +50,7 @@ public class Inventory : MonoBehaviour
         anim = playerObject.GetComponent<Animator>();
         canThrow = false;
         bottleSoundSource = GameObject.Find("CrashBottle");
+        rockSoundSource = GameObject.Find("CrashRock");
 
         for (int i = 0; i < (slotsX * slotsY); i++)
         {
@@ -66,13 +70,13 @@ public class Inventory : MonoBehaviour
             showInventory = !showInventory;
         }
 
-        if(itemWeapon != null || itemWeapon.itemName != "")
+        if (itemWeapon != null || itemWeapon.itemName != "")
         {
             equipWeapon();
 
             if (Input.GetKeyDown(KeyCode.U))
             {
-                if(itemWeapon.itemType == Item.ItemType.Food)
+                if (itemWeapon.itemType == Item.ItemType.Food)
                 {
                     anim.SetTrigger("Eat");
                     eatAudioSource.GetComponent<AudioSource>().Play();
@@ -83,7 +87,7 @@ public class Inventory : MonoBehaviour
 
         }
 
-        if(canThrow)
+        if (canThrow)
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
@@ -334,14 +338,18 @@ public class Inventory : MonoBehaviour
     {
         if (itemWeapon.itemType == Item.ItemType.Quest && itemWeapon != null)
         {
-            if(itemWeapon.itemName == "bottle")
+            if (itemWeapon.itemName == "bottle")
                 bottleGameObject.SetActive(true);
+            if (itemWeapon.itemName == "rock")
+                rockGameObject.SetActive(true);
             canThrow = true;
         }
         if (itemWeapon.itemType == Item.ItemType.Weapon && itemWeapon != null)
         {
-            if(itemWeapon.itemName == "sneaker")
+            if (itemWeapon.itemName == "sneaker")
                 sneakerGameObject.SetActive(true);
+            if (itemWeapon.itemName == "cane")
+                caneGameObject.SetActive(true);
 
             playerObject.GetComponent<PlayerAttack>().Damage = initialAtackDamage + itemWeapon.itemPower;
         }
@@ -354,12 +362,17 @@ public class Inventory : MonoBehaviour
         {
             if (itemWeapon.itemName == "bottle")
                 bottleGameObject.SetActive(false);
+            if (itemWeapon.itemName == "rock")
+                rockGameObject.SetActive(false);
         }
 
         if (itemWeapon.itemType == Item.ItemType.Weapon)
         {
             if (itemWeapon.itemName == "sneaker")
                 sneakerGameObject.SetActive(false);
+            if (itemWeapon.itemName == "cane")
+                caneGameObject.SetActive(false);
+
 
             playerObject.GetComponent<PlayerAttack>().Damage = initialAtackDamage;
         }
@@ -391,6 +404,31 @@ public class Inventory : MonoBehaviour
 
                 bottleSoundSource.transform.position = setTarget;
                 bottleSoundSource.GetComponent<AudioSource>().PlayDelayed(1);
+
+            }
+        }
+
+        if (itemWeapon.itemName == "rock")
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                Vector3 setTarget = hit.point;
+                Vector3 direction = setTarget - rockGameObject.transform.position;
+
+                GameObject copyRock = Instantiate(rockGameObject);
+                copyRock.transform.position = rockGameObject.transform.position;
+                rockGameObject.SetActive(false);
+
+                copyRock.transform.parent = null;
+                copyRock.GetComponent<Rigidbody>().useGravity = true;
+                copyRock.GetComponent<Rigidbody>().AddForce(direction * 85);
+                copyRock.GetComponent<Rigidbody>().AddForce(transform.up * 250);
+                itemWeapon = new Item();
+
+                rockSoundSource.transform.position = setTarget;
+                rockSoundSource.GetComponent<AudioSource>().PlayDelayed(1);
 
             }
         }

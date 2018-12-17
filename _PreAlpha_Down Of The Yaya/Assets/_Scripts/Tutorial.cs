@@ -14,7 +14,7 @@ public class Tutorial : MonoBehaviour {
     private GameObject telefono;
     private float previousVelocity;
     private bool helpPlayer;
-    private bool EndTuto;
+    public bool EndTuto;
     private Inventory inventory;
     private GameObject MeshLinkExterior;
     private GameObject ColliderExteriorD;
