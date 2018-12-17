@@ -15,8 +15,10 @@ public class ZombieAgent : MonoBehaviour
     public string pathHearing;
     private Animator anim;
     public int ID;
+    private Game diff;
 
     //movement variables
+    [HideInInspector]
     public float walkingSpeed;
     private int currentAction;
     private float lastDistance = 0f;
@@ -33,17 +35,10 @@ public class ZombieAgent : MonoBehaviour
     private float soundType;
     private float lastSoundType = 0f;
 
-    //starting variables
-    public float xStartPosition;
-    public float yStartPosition;
-    public float zStartPosition;
-
     //patrol variables
     public Transform objetivo;
 
     //training variables
-    public int xPlayer = 4;
-    public int zPlayer = 4;
     private bool restartPostion = false;
 
     //reward variables
@@ -56,8 +51,9 @@ public class ZombieAgent : MonoBehaviour
     public float distanceReward = 1f; //reward when it gets close
     private float currentReward = 0f;
     private float rewardHearing = 0f;
-    public float wrongSound = -1f;
-    public float rightSound = 1f;
+    private float wrongSound = -8f;
+    private float rightSound = 11f;
+    public float distanceZombies = 3f;
 
     //FOV variables
     public float FOVRadius; //how far ahead the agent can see
@@ -73,12 +69,14 @@ public class ZombieAgent : MonoBehaviour
     public float edgeDistance; //minimum distance between hits to do edge detection and avoid problems when the rays hit two different obstacles
     public MeshFilter FOVMeshFilter;
     Mesh FOVMesh;
-    public float distanceZombies;
+
 
 
     // Use this for initialization
     void Start()
     {
+        diff = GameObject.Find("Canvas").GetComponent<Game>();
+        applyDifficultySettings();
         QL = new QLearning(3, path, false);
         QLHearing = new QLearning(2, pathHearing, true);
         rb = GetComponent<Rigidbody>();
@@ -88,6 +86,25 @@ public class ZombieAgent : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
 
+    }
+
+    public void applyDifficultySettings()
+    {
+        switch (diff.difficulty)
+        {
+            case 0:
+                walkingSpeed = 10f;
+                wrongSound = -5f; //the user will be able to use each object 5 times
+                break;
+            case 1:
+                walkingSpeed = 20f;
+                wrongSound = -8f; //the user will be able to use each object 4 times
+                break;
+            case 2:
+                walkingSpeed = 30f;
+                wrongSound = -11f; //the user will be able to use each object 3 times
+                break;
+        }
     }
 
     void FixedUpdate()
@@ -116,10 +133,10 @@ public class ZombieAgent : MonoBehaviour
         if (!inView)
         {
             Collider[] hearingObjects = Physics.OverlapSphere(transform.position, hearingRadius, soundLayer | playerLayer);
-            if (hearingObjects.Length != 0)
+            for (int j = 0; j < hearingObjects.Length; j++)
             {
-                float hearingDistance = HearingRange(hearingObjects[0].transform.position);
-                AudioSource audioTarget = GameObject.FindGameObjectWithTag(hearingObjects[0].name).GetComponent<AudioSource>();
+                float hearingDistance = HearingRange(hearingObjects[j].transform.position);
+                AudioSource audioTarget = GameObject.Find(hearingObjects[j].name).GetComponent<AudioSource>();
                 if (hearingDistance < hearingRadius && audioTarget.isPlaying)
                 {
                     heard = true;
@@ -128,14 +145,15 @@ public class ZombieAgent : MonoBehaviour
                         case "Player":
                             soundType = 1f;
                             break;
-                        case "Botella":
+                        case "CrashBottle":
                             soundType = 2f;
                             break;
-                        case "Roca":
+                        case "Rock":
                             soundType = 3f;
                             break;
                     }
-                    lastPositionHeard = hearingObjects[0].transform.position;
+                    lastPositionHeard = hearingObjects[j].transform.position;
+                    break;
                 }
             }
 
@@ -211,6 +229,7 @@ public class ZombieAgent : MonoBehaviour
                 lastSoundType = 0;
                 heard = false;
                 rewardHearing += rightSound;
+                Debug.Log(rewardHearing);
                 float[] qStateHear = new float[4];
                 qStateHear[0] = 0f;
                 qStateHear[1] = 0f;
@@ -409,6 +428,7 @@ public class ZombieAgent : MonoBehaviour
                 qState[3] = 0f;
                 go = QLHearing.getAction(qState, rewardHearing);
                 rewardHearing = 0f;
+                Debug.Log("go or not");
             }
 
             if (go == 1)

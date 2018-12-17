@@ -14,11 +14,14 @@ public class Game : MonoBehaviour
     PlayerHealth playerHealth;
     GameObject player;
 
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         manDif = GameObject.FindGameObjectWithTag("Player").GetComponent<ManageDifficulty>();
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        manDif.buildObjectList();
+        manDif.objectsSet();
     }
 
     public void Save()
@@ -102,6 +105,45 @@ public class Game : MonoBehaviour
                 }
 
             }
+        }
+    }
+
+    public void setDifficultyToEasy()
+    {
+
+        difficulty = 0;
+        manDif.objectsSet();
+        foreach (GameObject zombie in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            ZombieAgent agent = zombie.GetComponent<ZombieAgent>();
+            agent.applyDifficultySettings();
+
+        }
+    }
+
+    public void setDifficultyToNormal()
+    {
+
+        difficulty = 1;
+        manDif.objectsSet();
+        foreach (GameObject zombie in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            ZombieAgent agent = zombie.GetComponent<ZombieAgent>();
+            agent.applyDifficultySettings();
+
+        }
+    }
+
+    public void setDifficultyToHard()
+    {
+
+        difficulty = 2;
+        manDif.objectsSet();
+        foreach (GameObject zombie in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            ZombieAgent agent = zombie.GetComponent<ZombieAgent>();
+            agent.applyDifficultySettings();
+
         }
     }
 }
