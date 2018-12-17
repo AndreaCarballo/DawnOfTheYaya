@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf0e31de5d5631a41b7cd55a1bc29085, type: 3}
+  m_Name: MaikelEN2
+  m_EditorClassIdentifier: 
+  dialogo: ' How did you get here? It''s infested with zombies out there!'
+  respuestas:
+  - respuesta: ' Zombies ?, is that how Latinos are called now?'
+    proximoDialogo: {fileID: 11400000, guid: 67adfadfaaae56045bf5d3455ee7c8b8, type: 2}
+  - respuesta: ' Neither zombies nor zombies, let me in as it is important!'
+    proximoDialogo: {fileID: 11400000, guid: ac402f97c625bba468088a71fdd6b8be, type: 2}

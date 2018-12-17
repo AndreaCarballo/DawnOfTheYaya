@@ -77,6 +77,14 @@ public class ObjectInteract : MonoBehaviour
                     //endPreAlphaMenu.SetActive(true);
                     //lifeHUD.SetActive(false);
                     break;
+                case "FINAL":
+                    //End Level 1
+                    //playerObject.SetActive(false);
+                    // ambientSound.SetActive(false);
+                    // taxiEndMusic.SetActive(true);
+                    endPreAlphaMenu.SetActive(true);
+                    //lifeHUD.SetActive(false);
+                    break;
                 case "Bottle":
                     inventory.AddItemByID(4);
                     playSound = true;

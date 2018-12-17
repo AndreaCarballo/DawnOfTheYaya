@@ -101,7 +101,17 @@ public class MovClick : MonoBehaviour
         {
             myNavMeshAgent.speed = 0f;
             Rect backgroundRect = new Rect(Screen.width / 8, Screen.height / 1.25f, 925, 55);
-            GUI.Box(backgroundRect, "\n Por favor, antes de empezar mantenga pulsado F1 para acceder a los controles de juego");
+            if (LanguageManager.idioma == 0)
+            {
+
+ GUI.Box(backgroundRect, "\n Por favor, antes de empezar mantenga pulsado F1 para acceder a los controles de juego");
+
+            }else if (LanguageManager.idioma == 1)
+            {
+                GUI.Box(backgroundRect, "\n Please, before you start hold down F1 to access the game controls");
+
+            }
+           
         }
 
     }

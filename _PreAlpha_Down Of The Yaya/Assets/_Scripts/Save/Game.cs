@@ -9,7 +9,7 @@ public class Game : MonoBehaviour
 {
 
     public int difficulty = 1;
-    public string language;
+    public int language;
     ManageDifficulty manDif;
     PlayerHealth playerHealth;
     GameObject player;
@@ -34,7 +34,7 @@ public class Game : MonoBehaviour
         game.zone = manDif.zone;
         game.time = manDif.time;
         game.lifeLost = playerHealth.lifeLost;
-        game.language = language;
+        game.language = LanguageManager.idioma;
         game.player = new SavePlayer();
         game.player.posX = player.transform.position.x;
         game.player.posY = player.transform.position.y;

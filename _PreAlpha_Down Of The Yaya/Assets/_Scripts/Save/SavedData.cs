@@ -10,7 +10,7 @@ public class SavedData
     public int zone;
     public float time;
     public int lifeLost;
-    public string language;
+    public int language;
     public List<SavedZombie> zombies;
     public SavePlayer player;
 
