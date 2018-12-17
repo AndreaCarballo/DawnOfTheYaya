@@ -20,12 +20,18 @@ public class DialogoController : MonoBehaviour {
     private GameObject player;
 
     DialogoNPC dialogos;
+    private GameObject posicionSalirTaxi;
+    public GameObject playerobject;
+    public GameObject Gatoobject;
     // Use this for initialization
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         prevSpeed = player.GetComponent<NavMeshAgent>().speed;
+        posicionSalirTaxi = GameObject.Find("PosicionSalirTaxi");
+        playerobject = GameObject.FindWithTag("Player");
+        Gatoobject = GameObject.Find("Gato");
     }
 
     void Update()
@@ -42,6 +48,15 @@ public class DialogoController : MonoBehaviour {
                 paneldeDialogo.SetActive(false);
                 dialogoNPC.gameObject.SetActive(false);
                 player.GetComponent<NavMeshAgent>().speed = prevSpeed;
+                ///En la posicion cerca del taxi pero sin chocar con el collider.
+                if (DialogoTaxi.desactivado == true)
+                {
+                    playerobject.transform.position = new Vector3(posicionSalirTaxi.transform.position.x, 0, posicionSalirTaxi.transform.position.z);
+                    playerobject.SetActive(true);
+                    Gatoobject.transform.position = new Vector3(posicionSalirTaxi.transform.position.x, 0, posicionSalirTaxi.transform.position.z + 1);
+                    Gatoobject.SetActive(true);
+
+                }
             }
         }
 	}

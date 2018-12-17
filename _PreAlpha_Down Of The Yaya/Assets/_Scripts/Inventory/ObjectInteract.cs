@@ -27,6 +27,7 @@ public class ObjectInteract : MonoBehaviour
     public AudioClip pickClip;
     public GameObject taxiEndMusic;
     public GameObject ambientSound;
+    public GameObject nigthSound;
     #endregion
 
 
@@ -75,6 +76,15 @@ public class ObjectInteract : MonoBehaviour
                     //ambientSound.SetActive(false);
                     //taxiEndMusic.SetActive(true);
                     //endPreAlphaMenu.SetActive(true);
+                    //lifeHUD.SetActive(false);
+                    break;
+                case "FINAL":
+                    //End Level 1
+                    //playerObject.SetActive(false);
+                    ambientSound.SetActive(false);
+                    taxiEndMusic.SetActive(true);
+                    endPreAlphaMenu.SetActive(true);
+                    nigthSound.SetActive(false);
                     //lifeHUD.SetActive(false);
                     break;
                 case "Bottle":

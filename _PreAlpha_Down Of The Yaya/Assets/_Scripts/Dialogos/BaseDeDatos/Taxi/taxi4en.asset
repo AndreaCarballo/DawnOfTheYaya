@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf0e31de5d5631a41b7cd55a1bc29085, type: 3}
+  m_Name: taxi4en
+  m_EditorClassIdentifier: 
+  dialogo: ' Hey! Look, if you do not do anything, I''m leaving, that I lost a long
+    time'
+  respuestas:
+  - respuesta: '...........'
+    proximoDialogo: {fileID: 11400000, guid: 09b70c4384a0d114f808262587fb8da2, type: 2}
