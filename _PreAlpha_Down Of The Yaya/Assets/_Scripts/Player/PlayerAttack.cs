@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour {
 
 
-    public int Damage = 20;
+    public int Damage;
     public float timebetweenAttacks = 0.5f;
     float timer;
     GameObject enemy;

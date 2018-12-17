@@ -31,10 +31,10 @@ public class ItemDatabase : MonoBehaviour
                 3, 10, Item.ItemType.Food));
             myItemList.Add(new Item("bottle", "Botella para utilizar de señuelo." + "\n" +
                 "\n\n" + "\n\n<color=#fb8cff>" + " Para equipar, presiona la tecla 'E' \n mientras tienes el cursor encima del objeto" + "</color>",
-                4, 0, Item.ItemType.Food));
+                4, 0, Item.ItemType.Quest));
             myItemList.Add(new Item("sneaker", "Zapatilla para usar como arma." + "\n" +
                 "\n\n" + "\n\n<color=#fb8cff>" + " Para equipar, presiona la tecla 'E' \n mientras tienes el cursor encima del objeto" + "</color>",
-                5, 10, Item.ItemType.Food));
+                5, 10, Item.ItemType.Weapon));
 
 
 

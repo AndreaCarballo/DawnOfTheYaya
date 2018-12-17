@@ -14,20 +14,20 @@ public class CamaraSeguimientoIN : MonoBehaviour
     private Vector3 UpPos;
     private Vector3 RightPos;
     private Vector3 LeftPos;
-    private bool mov1Z;
-    private bool mov2Z;
-    private bool mov1X;
-    private bool mov2X;
+    private bool mov1A;
+    private bool mov2A;
+    private bool mov1D;
+    private bool mov2D;
 
 
     // Use this for initialization
     void Start()
     {
         offset = mainCamera.transform.position - player.transform.position;
-        mov1Z = true;
-        mov2Z = false;
-        mov1X = true;
-        mov2X = false;
+        mov1A = true;
+        mov2A = false;
+        mov1D = true;
+        mov2D = false;
     }
 
     private void Update()
@@ -77,35 +77,35 @@ public class CamaraSeguimientoIN : MonoBehaviour
 
         //}
 
-        if (Input.GetKeyDown(KeyCode.A) && mov1Z)
+        if (Input.GetKeyDown(KeyCode.A) && mov1A)
         {
             offset = new Vector3(-offset.x, offset.y, offset.z);
-            mov1Z = false;
-            mov2Z = true;
-            mov1X = false;
-            mov2X = true;
-        } else if (Input.GetKeyDown(KeyCode.D) && mov1X)
+            mov1A = false;
+            mov2A = true;
+            mov1D = false;
+            mov2D = true;
+        } else if (Input.GetKeyDown(KeyCode.D) && mov1D)
         {
             offset = new Vector3(offset.x, offset.y, -offset.z);
-            mov1Z = false;
-            mov2Z = true;
-            mov1X = false;
-            mov2X = true;
+            mov1A = false;
+            mov2A = true;
+            mov1D = false;
+            mov2D = true;
 
-        } else if (Input.GetKeyDown(KeyCode.A) && mov2Z)
+        } else if (Input.GetKeyDown(KeyCode.A) && mov2A)
         {
             offset = new Vector3(offset.x, offset.y, -offset.z);
-            mov1Z = true;
-            mov2Z = false;
-            mov1X = true;
-            mov2X = false;
-        } else if (Input.GetKeyDown(KeyCode.D) && mov2X)
+            mov1A = true;
+            mov2A = false;
+            mov1D = true;
+            mov2D = false;
+        } else if (Input.GetKeyDown(KeyCode.D) && mov2D)
         {
             offset = new Vector3(-offset.x, offset.y, offset.z);
-            mov1Z = true;
-            mov2Z = false;
-            mov1X = true;
-            mov2X = false;
+            mov1A = true;
+            mov2A = false;
+            mov1D = true;
+            mov2D = false;
         }
 
         mainCamera.transform.LookAt(player.transform);

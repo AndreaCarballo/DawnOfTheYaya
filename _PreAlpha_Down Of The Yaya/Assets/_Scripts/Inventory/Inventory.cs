@@ -21,6 +21,7 @@ public class Inventory : MonoBehaviour
     private Animator anim;
     private bool canThrow;
     private GameObject bottleSoundSource;
+    private int initialAtackDamage;
 
 
 
@@ -33,6 +34,7 @@ public class Inventory : MonoBehaviour
     public GUISkin skin2;
     public GameObject bottleGameObject;
     public GameObject sneakerGameObject;
+    public GameObject eatAudioSource;
 
     #endregion
 
@@ -41,6 +43,7 @@ public class Inventory : MonoBehaviour
         itemDatabase = GameObject.FindGameObjectWithTag("ItemDatabase").GetComponent<ItemDatabase>();
         craftStation = GameObject.Find("CraftStation");
         playerObject = GameObject.FindGameObjectWithTag("Player");
+        initialAtackDamage = playerObject.GetComponent<PlayerAttack>().Damage;
         anim = playerObject.GetComponent<Animator>();
         canThrow = false;
         bottleSoundSource = GameObject.Find("CrashBottle");
@@ -66,6 +69,18 @@ public class Inventory : MonoBehaviour
         if(itemWeapon != null || itemWeapon.itemName != "")
         {
             equipWeapon();
+
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                if(itemWeapon.itemType == Item.ItemType.Food)
+                {
+                    anim.SetTrigger("Eat");
+                    eatAudioSource.GetComponent<AudioSource>().Play();
+                    playerObject.GetComponent<PlayerHealth>().TakeLife(itemWeapon.itemPower);
+                    itemWeapon = new Item();
+                }
+            }
+
         }
 
         if(canThrow)
@@ -195,12 +210,14 @@ public class Inventory : MonoBehaviour
                         if (Input.GetKeyDown(KeyCode.U)) //Aumentar vida si pulsamos la U mientras tenemos el raton encima
                         {
                             anim.SetTrigger("Eat");
+                            eatAudioSource.GetComponent<AudioSource>().Play();
                             playerObject.GetComponent<PlayerHealth>().TakeLife(inventory[i].itemPower);
                             inventory[i] = new Item();
                         }
                         if (Input.GetKeyDown(KeyCode.E)) //Equipar Objeto
                         {
                             AddItem(itemWeapon);
+                            quitWeapon();
                             itemWeapon = inventory[i];
                             inventory[i] = new Item();
                         }
@@ -315,26 +332,36 @@ public class Inventory : MonoBehaviour
 
     public void equipWeapon()
     {
-        if (itemWeapon.itemName == "bottle" && itemWeapon != null)
+        if (itemWeapon.itemType == Item.ItemType.Quest && itemWeapon != null)
         {
-            bottleGameObject.SetActive(true);
+            if(itemWeapon.itemName == "bottle")
+                bottleGameObject.SetActive(true);
             canThrow = true;
         }
-        if (itemWeapon.itemName == "sneaker" && itemWeapon != null)
+        if (itemWeapon.itemType == Item.ItemType.Weapon && itemWeapon != null)
         {
-            sneakerGameObject.SetActive(true);
+            if(itemWeapon.itemName == "sneaker")
+                sneakerGameObject.SetActive(true);
+
+            playerObject.GetComponent<PlayerAttack>().Damage = initialAtackDamage + itemWeapon.itemPower;
         }
 
     }
 
     public void quitWeapon()
     {
-        if (itemWeapon.itemName == "bottle")
-            bottleGameObject.SetActive(false);
-
-        if (itemWeapon.itemName == "sneaker")
+        if (itemWeapon.itemType == Item.ItemType.Quest)
         {
-            sneakerGameObject.SetActive(false);
+            if (itemWeapon.itemName == "bottle")
+                bottleGameObject.SetActive(false);
+        }
+
+        if (itemWeapon.itemType == Item.ItemType.Weapon)
+        {
+            if (itemWeapon.itemName == "sneaker")
+                sneakerGameObject.SetActive(false);
+
+            playerObject.GetComponent<PlayerAttack>().Damage = initialAtackDamage;
         }
 
 

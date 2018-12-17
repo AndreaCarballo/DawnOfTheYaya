@@ -14,34 +14,34 @@ public class CamaraSeguimiento : MonoBehaviour
     private Vector3 UpPos;
     private Vector3 RightPos;
     private Vector3 LeftPos;
-    private bool mov1Y;
-    private bool mov2Y;
-    private bool mov1X;
-    private bool mov2X;
+    private bool mov1A;
+    private bool mov2A;
+    private bool mov1D;
+    private bool mov2D;
 
 
     // Use this for initialization
     void Start()
     {
         offset = mainCamera.transform.position - player.transform.position;
-        mov1Y = true;
-        mov2Y = false;
-        mov1X = true;
-        mov2X = false;
+        mov1A = true;
+        mov2A = false;
+        mov1D = true;
+        mov2D = false;
     }
 
     private void Update()
     {
-        DownPos = new Vector3((player.transform.position + offset).x,
+        DownPos = new Vector3((player.transform.position - offset).x,
             (player.transform.position + offset).y,
-            (player.transform.position + offset).z - 2.5f);
+            (player.transform.position + offset).z + 1.5f);
         UpPos = new Vector3((player.transform.position + offset).x,
             (player.transform.position + offset).y,
-            (player.transform.position + offset).z + 2.5f);
-        RightPos = new Vector3((player.transform.position + offset).x -5f,
+            (player.transform.position + offset).z + 1.5f);
+        RightPos = new Vector3((player.transform.position + offset).x - 2.5f,
             (player.transform.position + offset).y,
             (player.transform.position + offset).z);
-        LeftPos = new Vector3((player.transform.position + offset).x + 5f,
+        LeftPos = new Vector3((player.transform.position + offset).x + 2.5f,
             (player.transform.position + offset).y,
             (player.transform.position + offset).z);
     }
@@ -50,70 +50,69 @@ public class CamaraSeguimiento : MonoBehaviour
     void LateUpdate()
     {
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position,
-                DownPos, 0.85f * Time.deltaTime);
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position,
-                LeftPos, 0.85f * Time.deltaTime);
-        }
-        else if (Input.GetKey(KeyCode.W))
-        {
-            mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position,
-                UpPos, 0.85f * Time.deltaTime);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position,
-                RightPos, 0.85f * Time.deltaTime);
-        }
-        else
-        {
-            RayCastCamera();
+        //if (Input.GetKey(KeyCode.S))
+        //{
+        //    mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position,
+        //        DownPos, 0.85f * Time.deltaTime);
+        //}
+        //else if (Input.GetKey(KeyCode.A))
+        //{
+        //    mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position,
+        //        LeftPos, 0.85f * Time.deltaTime);
+        //}
+        //else if (Input.GetKey(KeyCode.W))
+        //{
+        //    mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position,
+        //        UpPos, 0.85f * Time.deltaTime);
+        //}
+        //else if (Input.GetKey(KeyCode.D))
+        //{
+        //    mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position,
+        //        RightPos, 0.85f * Time.deltaTime);
+        //}
+        //else
+        //{
             mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position,
                 player.transform.position + offset, 1.0f * Time.deltaTime);
-            
-        }
 
-        if (Input.GetKeyDown(KeyCode.Z) && mov1Y)
-        {
-            offset = new Vector3(-offset.x, offset.y, offset.z);
-            mov1Y = false;
-            mov2Y = true;
-            mov1X = false;
-            mov2X = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.Z) && mov2Y)
+        //}
+
+        if (Input.GetKeyDown(KeyCode.A) && mov1A)
         {
             offset = new Vector3(offset.x, offset.y, -offset.z);
-            mov2Y = false;
-            mov1Y = true;
-            mov2X = false;
-            mov1X = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.X) && mov1X)
-        {
-            offset = new Vector3(offset.x, offset.y, -offset.z);
-            mov1X = false;
-            mov2X = true;
-            mov1X = false;
-            mov2X = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.X) && mov2X)
+            mov1A = false;
+            mov2A = true;
+            mov1D = false;
+            mov2D = true;
+        } else if (Input.GetKeyDown(KeyCode.D) && mov1D)
         {
             offset = new Vector3(-offset.x, offset.y, offset.z);
-            mov2X = false;
-            mov1X = true;
-            mov2Y = false;
-            mov1Y = true;
+            mov1A = false;
+            mov2A = true;
+            mov1D = false;
+            mov2D = true;
+
+
+        } else if (Input.GetKeyDown(KeyCode.A) && mov2A)
+        {
+            offset = new Vector3(-offset.x, offset.y, offset.z);
+            mov1A = true;
+            mov2A = false;
+            mov1D = true;
+            mov2D = false;
+        } else if (Input.GetKeyDown(KeyCode.D) && mov2D)
+        {
+
+            offset = new Vector3(offset.x, offset.y, -offset.z);
+            mov1A = true;
+            mov2A = false;
+            mov1D = true;
+            mov2D = false;
         }
 
         mainCamera.transform.LookAt(player.transform);
     }
+
 
     void RayCastCamera()
     {

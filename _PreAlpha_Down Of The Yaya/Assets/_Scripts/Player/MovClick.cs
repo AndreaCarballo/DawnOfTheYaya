@@ -28,6 +28,7 @@ public class MovClick : MonoBehaviour
     public Texture2D cursorTexture;
     public bool sawIntroduction;
     public AudioClip steps;
+    public GameObject panelControlsObject;
     #endregion
 
 
@@ -82,6 +83,16 @@ public class MovClick : MonoBehaviour
             StopMovement();
         }
 
+        if (Input.GetKey(KeyCode.F1))
+        {
+            panelControlsObject.SetActive(true);
+            myNavMeshAgent.speed = previousVelocity;
+            sawIntroduction = true;
+        }else
+        {
+            panelControlsObject.SetActive(false);
+        }
+
     }
 
     void OnGUI()
@@ -92,22 +103,7 @@ public class MovClick : MonoBehaviour
             Rect backgroundRect = new Rect(Screen.width / 8, Screen.height / 1.25f, 925, 55);
             GUI.Box(backgroundRect, "\n Por favor, antes de empezar mantenga pulsado F1 para acceder a los controles de juego");
         }
-        if (Input.GetKey(KeyCode.F1))
-        {
-            Rect backgroundRect = new Rect(Screen.width / 8, Screen.height / 3, 925, 300);
-            GUI.Box(backgroundRect,
-            "<color=#fff>" + "\n\nCONTROLES DE JUGADOR:" + "</color>" + "\nMovimiento con" + " <color=#ce5100>" + "click derecho" + "</color>"
-            + "\nInteracción (Atacar, coger objetos e interactuar con el entorno) " + "<color=#00ce4f>" + "click izquierdo" + "</color>"
-            + "\nMarcar opciones de diálogo con " + "<color=#00ce4f>" + "click izquierdo" + "</color>"
-            + "\nAcceder al inventario con la letra " + "<color=#00bdce>" + "\"I\" " + "</color>"
-            + "\nMovimiento en sigilo con la tecla " + " <color=#00bdce>" + "\"Shift\" " + "</color>"
-            + "\nDetener el movimiento con la tecla " + " <color=#00bdce>" + "\"Espacio\" " + "</color>"
-            + "<color=#fff>" + "\n\nCONTROLES DE CÁMARA:" + "</color>"
-            + "\nPara rotar la cámara hacia la derecha " + " <color=#00bdce>" + "\"X\" " + "</color>"
-            + "\nPara rotar la cámara hacia la izquierda " + " <color=#00bdce>" + "\"Z\" " + "</color>");
-            myNavMeshAgent.speed = previousVelocity;
-            sawIntroduction = true;
-        }
+
     }
 
     #region Methods
