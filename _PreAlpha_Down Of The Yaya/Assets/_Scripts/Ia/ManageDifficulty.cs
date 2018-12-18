@@ -268,18 +268,18 @@ public class ManageDifficulty : MonoBehaviour
         hard0.Add(new Prefabs(bananas, new Vector3(1f, 0.7f, 1f)));
 
         List<Prefabs> easy1 = new List<Prefabs>();
-        easy1.Add(new Prefabs(canes, new Vector3(45f, 0.2f, 0f)));
+        easy1.Add(new Prefabs(canes, new Vector3(40f, 0.2f, 7f)));
         easy1.Add(new Prefabs(apples, new Vector3(455f, 0.2f, 15f)));
         easy1.Add(new Prefabs(bottles, new Vector3(30f, 0.5f, -25f)));
         easy1.Add(new Prefabs(brocolis, new Vector3(50f, 0.2f, -30f)));
 
         List<Prefabs> normal1 = new List<Prefabs>();
-        normal1.Add(new Prefabs(canes, new Vector3(45f, 0.2f, 0f)));
+        normal1.Add(new Prefabs(canes, new Vector3(40f, 0.2f, 7f)));
         normal1.Add(new Prefabs(apples, new Vector3(55f, 0.2f, 15f)));
         normal1.Add(new Prefabs(brocolis, new Vector3(50f, 0.2f, -30f)));
 
         List<Prefabs> hard1 = new List<Prefabs>();
-        hard1.Add(new Prefabs(canes, new Vector3(45f, 0.2f, 0f)));
+        hard1.Add(new Prefabs(canes, new Vector3(40f, 0.2f, 7f)));
         hard1.Add(new Prefabs(brocolis, new Vector3(50f, 0.2f, -30f)));
 
         List<Prefabs> easy2 = new List<Prefabs>();
